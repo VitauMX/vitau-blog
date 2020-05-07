@@ -1,19 +1,21 @@
 import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 
-import Layout from "../components/layout"
+// import Layout from "../components/layout"
+import Layout from "../components/layout/Layout"
 import SEO from "../components/seo"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      allGhostPost {
+      allGhostPost(sort: { order: DESC, fields: published_at }) {
         edges {
           node {
             title
             slug
             reading_time
             created_at
+            published_at
           }
         }
       }
