@@ -39,12 +39,13 @@ h6 {
   &--displayBig {
     font-size: var(--type-scale-100);
     letter-spacing: -2px;
+    line-height: 1;
   }
 
   &--display {
     font-size: var(--type-scale-80);
     letter-spacing: 0;
-    line-height: 1.25;
+    line-height: 1;
   }
 
   &--big {

@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import { Helmet } from 'react-helmet'
 
 // Styles
@@ -9,7 +10,11 @@ import './layout.scss'
 import MainHeader from '../mainHeader/MainHeader'
 import Footer from '../footer/Footer'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, isWrapped }) => {
+  const styles = classNames('main', {
+    container: isWrapped === true,
+  })
+
   return (
     <>
       <Helmet>
@@ -22,7 +27,7 @@ const Layout = ({ children }) => {
 
       <MainHeader />
 
-      <main className="main">{children}</main>
+      <main className={styles}>{children}</main>
 
       <Footer />
     </>

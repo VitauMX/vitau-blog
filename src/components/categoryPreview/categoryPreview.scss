@@ -1,0 +1,44 @@
+.categoryPreview {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  min-height: 150px;
+  text-decoration: none;
+  background-size: cover;
+  background-position: center center;
+  background-color: var(--brand-blue);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: 200ms all ease-in-out;
+
+  &:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-4px);
+  }
+
+  .title,
+  .text {
+    color: white;
+    line-height: 1;
+  }
+
+  > * {
+    z-index: 100;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+      0deg,
+      rgba(#022a3b, 0.8) 0%,
+      rgba(#022a3b, 0) 60%
+    );
+  }
+}

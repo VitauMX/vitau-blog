@@ -5,7 +5,7 @@ import './socialMedia.scss'
 const SocialMedia = (props) => {
   const { isWhite } = props
 
-  let styles = classNames('socialMedia', {
+  const styles = classNames('socialMedia', {
     'socialMedia--isWhite': isWhite === true,
   })
 

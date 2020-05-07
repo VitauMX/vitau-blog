@@ -4,7 +4,6 @@ import { useStaticQuery, graphql } from 'gatsby'
 import Layout from '../components/layout/Layout'
 import Hero from '../components/hero/Hero'
 import PostFeed from '../components/postFeed/PostFeed'
-// import SEO from '../components/seo'
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -34,8 +33,6 @@ const IndexPage = () => {
       <Hero />
 
       <PostFeed posts={posts} />
-
-      {/* <Pagination pageContext={pageContext} /> */}
     </Layout>
   )
 }

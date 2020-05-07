@@ -1,8 +1,8 @@
-import React, { useState } from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
-import classNames from "classnames"
-import "./mainHeader.scss"
-import logo from "../../images/vitau-logo.svg"
+import React, { useState } from 'react'
+import { Link, useStaticQuery, graphql } from 'gatsby'
+import classNames from 'classnames'
+import './mainHeader.scss'
+import logo from '../../images/vitau-logo.svg'
 
 const MainHeader = () => {
   const data = useStaticQuery(graphql`
@@ -24,15 +24,15 @@ const MainHeader = () => {
 
   const [isOpen, setIsOpen] = useState(false)
 
-  const mainNavStyles = classNames("mainNav", {
+  const mainNavStyles = classNames('mainNav', {
     isOpen: isOpen === true,
   })
 
   return (
     <header className="mainHeader container">
-      <a className="mainHeader-logo" href="/">
+      <Link to="/" className="mainHeader-logo">
         <img src={logo} alt="Vitau logo" />
-      </a>
+      </Link>
 
       <nav className={mainNavStyles}>
         <div className="mainNav-content">
