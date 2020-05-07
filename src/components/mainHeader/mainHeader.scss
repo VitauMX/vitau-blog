@@ -1,0 +1,119 @@
+.mainHeader {
+  position: sticky;
+  top: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: var(--shadow);
+  z-index: 1000;
+
+  @media only screen and (min-width: 500px) {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  @media only screen and (min-width: 1440px) {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+.mainHeader-logo {
+  display: flex;
+  width: 117px;
+
+  img {
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 1180px) {
+    width: 145px;
+  }
+}
+
+.mainNav {
+  @media only screen and (max-width: 500px) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    visibility: hidden;
+    background-color: rgba(#022a3b, 0.5);
+  }
+
+  &.isOpen {
+    display: flex;
+    visibility: visible;
+  }
+}
+
+.mainNav-content {
+  @media only screen and (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    border-radius: var(--border-radius);
+  }
+}
+
+.mainNav-link {
+  font-size: var(--text-scale-1);
+  color: var(--brand-02);
+  font-weight: 700;
+  transition: color 200ms ease-in-out;
+  text-decoration: none;
+
+  &:hover,
+  &.active {
+    color: var(--brand-01);
+    text-decoration: none;
+  }
+
+  @media only screen and (min-width: 501px) {
+    & + & {
+      margin-left: 2rem;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    padding: 1rem 2rem;
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.toggleMobileNav {
+  padding: 0;
+  display: flex;
+  font-size: 1.5rem;
+  color: var(--brand-02);
+  appearance: none;
+  border: 0;
+  background-color: transparent;
+
+  i {
+    margin: auto;
+  }
+
+  @media only screen and (min-width: 501px) {
+    display: none;
+  }
+
+  &--close {
+    padding: 0.5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    transform: translate(0, -100%);
+  }
+}
