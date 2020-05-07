@@ -1,0 +1,31 @@
+.socialMedia {
+  display: flex;
+  align-items: center;
+  color: var(--brand-blue);
+
+  &-icon {
+    transition: 200ms all ease-in-out;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: inherit;
+
+    &:hover {
+      color: var(--brand-dark-blue);
+      opacity: 1;
+    }
+
+    & + & {
+      margin-left: 2rem;
+    }
+  }
+
+  &--isWhite {
+    color: white;
+  }
+
+  &--isWhite &-icon:hover {
+    color: var(--brand-blue);
+  }
+}
