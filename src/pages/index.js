@@ -1,9 +1,9 @@
 import React from 'react'
-import { useStaticQuery, graphql, Link } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
 
-// import Layout from "../components/layout"
 import Layout from '../components/layout/Layout'
-import SEO from '../components/seo'
+import Hero from '../components/hero/Hero'
+// import SEO from '../components/seo'
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -26,16 +26,11 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <Hero />
 
-      <section>
-        {posts.map(({ node }, i) => (
-          <Link to={`/${node.slug}`} key={i}>
-            <p>{node.title}</p>
-            <p>{node.created_at}</p>
-          </Link>
-        ))}
-      </section>
+      {/* <PostFeed posts={posts} /> */}
+
+      {/* <Pagination pageContext={pageContext} /> */}
     </Layout>
   )
 }

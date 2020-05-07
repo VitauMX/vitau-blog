@@ -1,0 +1,70 @@
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  max-height: 600px;
+
+  .subtitle {
+    max-width: 610px;
+  }
+
+  &-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    z-index: -100;
+  }
+}
+
+.square {
+  position: absolute;
+  border-radius: 1rem;
+  transition: 150ms all ease-in-out;
+
+  &-yellow {
+    left: 0;
+    width: 300px;
+    height: 300px;
+    background-color: var(--brand-yellow);
+    transform: translate(-200px, -80px) rotate(23deg);
+  }
+
+  &-blue {
+    right: 0;
+    width: 450px;
+    height: 450px;
+    background-color: var(--brand-blue);
+    transform: translate(190px) rotate(150deg);
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .square {
+    &-yellow {
+      transform: translate(-250px, 100px) rotate(23deg);
+    }
+
+    &-blue {
+      transform: translate(340px, -150px) rotate(150deg);
+    }
+  }
+}
+
+@media only screen and (min-width: 1800px) {
+  .square {
+    &-yellow {
+      width: 450px;
+      height: 450px;
+    }
+
+    &-blue {
+      width: 550px;
+      height: 550px;
+    }
+  }
+}
