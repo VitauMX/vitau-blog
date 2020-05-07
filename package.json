@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "classnames": "^2.2.6",
     "gatsby": "^2.21.15",
     "gatsby-image": "^2.4.2",
     "gatsby-plugin-manifest": "^2.4.2",
@@ -21,7 +22,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-helmet": "^6.0.0"
+    "react-helmet": "^6.0.0",
+    "vitau-ui-framework": "^3.0.0"
   },
   "devDependencies": {
     "prettier": "2.0.5"
