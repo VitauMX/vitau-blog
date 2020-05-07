@@ -1,0 +1,10 @@
+:root {
+  --space-xxs: calc(var(--spaceScale-unit) * 0.25);
+  --space-xs: calc(var(--spaceScale-unit) * 0.5);
+  --space-s: calc(var(--spaceScale-unit) * 0.75);
+  --space: var(--spaceScale-unit);
+  --space-m: calc(var(--spaceScale-unit) * 1.25);
+  --space-l: calc(var(--spaceScale-unit) * 2);
+  --space-xl: calc(var(--spaceScale-unit) * 3.25);
+  --space-xxl: calc(var(--spaceScale-unit) * 5.25);
+}

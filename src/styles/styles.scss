@@ -1,3 +1,23 @@
+/*
+* Tokens
+*/
+@import './tokens/colors.scss';
+@import './tokens/typeScale.scss';
+
+/*
+* Settings
+*/
+@import './settings/colors.scss';
+@import './settings/spacing.scss';
+@import './settings/settings.scss';
+
+/*
+* Globals
+*/
+@import './globals/boxModel.scss';
+@import './globals/body.scss';
+@import './globals/typography.scss';
+
 h1,
 h2,
 h3,

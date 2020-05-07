@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet"
 
 // Styles
 import "normalize.css"
-import { defaultStyles } from "vitau-ui-framework"
 import "../../styles/styles.scss"
 import "./layout.scss"
 

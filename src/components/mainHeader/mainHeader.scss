@@ -67,14 +67,14 @@
 
 .mainNav-link {
   font-size: var(--text-scale-1);
-  color: var(--brand-02);
+  color: var(--brand-blue);
   font-weight: 700;
   transition: color 200ms ease-in-out;
   text-decoration: none;
 
   &:hover,
   &.active {
-    color: var(--brand-01);
+    color: var(--brand-dark-blue);
     text-decoration: none;
   }
 
@@ -95,7 +95,7 @@
   padding: 0;
   display: flex;
   font-size: 1.5rem;
-  color: var(--brand-02);
+  color: var(--brand-blue);
   appearance: none;
   border: 0;
   background-color: transparent;

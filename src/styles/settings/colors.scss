@@ -1,0 +1,21 @@
+:root {
+  /* Utilities colors */
+  --u-info: var(--blue-50);
+  --u-info-hover: var(--blue-70);
+  --u-info-tint: var(--blue-30);
+  --u-info-shade: var(--blue-80);
+  --u-success: var(--green-40);
+  --u-success-hover: var(--green-50);
+  --u-success-tint: var(--green-30);
+  --u-success-shade: var(--green-60);
+  --u-warning: var(--orange-50);
+  --u-warning-hover: var(--orange-70);
+  --u-warning-tint: var(--orange-30);
+  --u-warning-shade: var(--orange-80);
+  --u--destructive: var(--red-50);
+  --u--destructive-hover: var(--red-70);
+  --u--destructive-tint: var(--red-40);
+  --u--destructive-shade: var(--red-80);
+  --u-links: #3986bd;
+  --u-white: #ffffff;
+}

@@ -1,0 +1,12 @@
+:root {
+  --type-scale-10: calc(var(--typeScale-unit) * 0.75);
+  --type-scale-20: calc(var(--typeScale-unit) * 0.875);
+  --type-scale-30: var(--typeScale-unit);
+  --type-scale-40: calc(var(--typeScale-unit) * 1.5);
+  --type-scale-50: calc(var(--typeScale-unit) * 2);
+  --type-scale-60: calc(var(--typeScale-unit) * 2.5);
+  --type-scale-70: calc(var(--typeScale-unit) * 3);
+  --type-scale-80: calc(var(--typeScale-unit) * 3.5);
+  --type-scale-90: calc(var(--typeScale-unit) * 4);
+  --type-scale-100: calc(var(--typeScale-unit) * 4.5);
+}
