@@ -20,7 +20,7 @@ const IndexPage = () => {
             slug
             feature_image
             reading_time
-            created_at
+            published_at
           }
         }
       }

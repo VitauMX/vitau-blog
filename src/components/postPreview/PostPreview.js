@@ -9,7 +9,9 @@ import './postPreview.scss'
 const PostPreview = ({ post }) => {
   dayjs.extend(localizedFormat)
 
-  const createdAt = dayjs(post.created_at).locale('es').format('LL', 'es')
+  const publishedAt = dayjs(post.published_at).locale('es').format('LL', 'es')
+  const minute = post.reading_time > 1 ? 'minutos' : 'minuto'
+
   const styles = { backgroundImage: 'url(' + post.feature_image + ')' }
 
   return (
@@ -22,7 +24,7 @@ const PostPreview = ({ post }) => {
         <h4 className="postPreview-title">{post.title}</h4>
 
         <div className="postPreview-meta">
-          {createdAt} | {post.reading_time} minutos
+          {publishedAt} | {post.reading_time} {minute}
         </div>
       </article>
     </Link>
