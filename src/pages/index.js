@@ -1,9 +1,9 @@
-import React from "react"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import React from 'react'
+import { useStaticQuery, graphql, Link } from 'gatsby'
 
 // import Layout from "../components/layout"
-import Layout from "../components/layout/Layout"
-import SEO from "../components/seo"
+import Layout from '../components/layout/Layout'
+import SEO from '../components/seo'
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -27,9 +27,6 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <h1>Hi people</h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <p>Now go build something great.</p>
 
       <section>
         {posts.map(({ node }, i) => (

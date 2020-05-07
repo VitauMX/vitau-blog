@@ -1,13 +1,13 @@
-import React from "react"
-import { Helmet } from "react-helmet"
+import React from 'react'
+import { Helmet } from 'react-helmet'
 
 // Styles
-import "normalize.css"
-import "../../styles/styles.scss"
-import "./layout.scss"
+import 'normalize.css'
+import '../../styles/styles.scss'
+import './layout.scss'
 
-import MainHeader from "../mainHeader/MainHeader"
-// import Footer from "../footer/Footer"
+import MainHeader from '../mainHeader/MainHeader'
+import Footer from '../footer/Footer'
 
 const Layout = ({ children }) => {
   return (
@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
 
       <main className="main">{children}</main>
 
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 }
