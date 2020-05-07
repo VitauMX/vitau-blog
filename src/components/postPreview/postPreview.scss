@@ -46,16 +46,16 @@
 
 .postPreview-title {
   margin-top: auto;
-  font-size: var(--text-scale-3);
+  font-size: var(--type-scale-50);
   line-height: 1.25;
 }
 
 .postPreview-category {
   padding: 0.25rem 0.75rem;
   background-color: white;
-  font-size: var(--text-scale-000);
+  font-size: var(--type-scale-20);
   font-weight: 800;
-  color: var(--brand-02);
+  color: var(--brand-blue);
   text-transform: uppercase;
   letter-spacing: 2px;
   border-radius: 100px;

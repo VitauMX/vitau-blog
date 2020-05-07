@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 import Layout from '../components/layout/Layout'
 import Hero from '../components/hero/Hero'
+import PostFeed from '../components/postFeed/PostFeed'
 // import SEO from '../components/seo'
 
 const IndexPage = () => {
@@ -11,11 +12,15 @@ const IndexPage = () => {
       allGhostPost(sort: { order: DESC, fields: published_at }) {
         edges {
           node {
+            id
             title
+            primary_tag {
+              name
+            }
             slug
+            feature_image
             reading_time
             created_at
-            published_at
           }
         }
       }
@@ -28,7 +33,7 @@ const IndexPage = () => {
     <Layout>
       <Hero />
 
-      {/* <PostFeed posts={posts} /> */}
+      <PostFeed posts={posts} />
 
       {/* <Pagination pageContext={pageContext} /> */}
     </Layout>

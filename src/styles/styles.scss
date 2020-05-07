@@ -18,15 +18,6 @@
 @import './globals/body.scss';
 @import './globals/typography.scss';
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-}
-
 .container {
   padding-right: calc(50vw - (95% / 2));
   padding-left: calc(50vw - (95% / 2));

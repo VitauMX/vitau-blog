@@ -15,7 +15,9 @@ const PostPreview = ({ post }) => {
   return (
     <Link className="postPreview" to={`/${post.slug}`}>
       <article className="postPreview-content" style={styles}>
-        <div className="postPreview-category">{post.primary_tag.name}</div>
+        {post.primary_tag && (
+          <div className="postPreview-category">{post.primary_tag.name}</div>
+        )}
 
         <h4 className="postPreview-title">{post.title}</h4>
 

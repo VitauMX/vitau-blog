@@ -1,3 +1,12 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
 .text {
   margin: 0;
   font-size: var(--type-scale-30);
@@ -25,6 +34,7 @@
   font-weight: 700;
   color: var(--grey-90);
   font-size: var(--type-scale-40);
+  margin: 0;
 
   &--displayBig {
     font-size: var(--type-scale-100);
