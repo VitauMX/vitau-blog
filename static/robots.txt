@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://beta-blog.vitau.mx/sitemap.xml
