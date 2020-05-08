@@ -5,6 +5,7 @@ import Layout from '../components/layout/Layout'
 import Hero from '../components/hero/Hero'
 import CategoryPreview from '../components/categoryPreview/CategoryPreview'
 import './categorias.scss'
+import { Helmet } from 'react-helmet'
 
 const Categories = () => {
   const data = useStaticQuery(graphql`
@@ -29,6 +30,10 @@ const Categories = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Categorías | Vitau Blog</title>
+      </Helmet>
+
       <Hero />
 
       <section className="categories container">

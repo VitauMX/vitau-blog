@@ -6,9 +6,10 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Vitau | Blog`,
+    description: `Salud, nutrición, hábitos, cuidado personal y más maneras de ser la mejor versión de nosotros mismos.`,
+    author: `Vitau Médical`,
+    url: `http://beta-blog.vitau.mx`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -24,11 +25,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        short_name: `Vitau Blog`,
+        name: `Vitau Médical Blog`,
+        description: `Salud, nutrición, hábitos, cuidado personal y más maneras de ser la mejor versión de nosotros mismos.`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#022a3b`,
+        theme_color: `#00aaff`,
         display: `minimal-ui`,
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },

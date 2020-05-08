@@ -5,19 +5,22 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 import { graphql, Link } from 'gatsby'
 
 import Layout from '../../components/layout/Layout'
+import PostMeta from '../../components/seo/PostMeta'
 import './post.scss'
 
 const Post = ({ data, location }) => {
   dayjs.extend(localizedFormat)
-
   const post = data.ghostPost
+
   const publishedAt = dayjs(post.published_at).locale('es').format('LL', 'es')
   const minute = post.reading_time > 1 ? 'minutos' : 'minuto'
 
   return (
     <Layout>
+      <PostMeta post={post} />
+
       <article className="post container">
-        <Link to={post.primary_tag.slug} className="post-category">
+        <Link to={`/${post.primary_tag.slug}`} className="post-category">
           {post.primary_tag.name}
         </Link>
 
@@ -50,9 +53,13 @@ export const postQuery = graphql`
       id
       title
       html
+      slug
       feature_image
       published_at
+      excerpt
       reading_time
+      meta_title
+      meta_description
       primary_tag {
         name
         slug

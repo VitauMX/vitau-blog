@@ -1,12 +1,12 @@
 import React from 'react'
 import classNames from 'classnames'
-import { Helmet } from 'react-helmet'
 
 // Styles
 import 'normalize.css'
 import '../../styles/styles.scss'
 import './layout.scss'
 
+import SiteMeta from '../seo/SiteMeta'
 import MainHeader from '../mainHeader/MainHeader'
 import Footer from '../footer/Footer'
 
@@ -17,13 +17,7 @@ const Layout = ({ children, isWrapped }) => {
 
   return (
     <>
-      <Helmet>
-        <html lang="es" />
-        <link
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
-          rel="stylesheet"
-        />
-      </Helmet>
+      <SiteMeta />
 
       <MainHeader />
 

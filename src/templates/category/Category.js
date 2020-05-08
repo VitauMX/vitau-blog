@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 
 import Layout from '../../components/layout/Layout'
 import PostPreview from '../../components/postPreview/PostPreview'
+import CategoryMeta from '../../components/seo/CategoryMeta'
 
 import './category.scss'
 
@@ -12,6 +13,8 @@ const Category = ({ data, location }) => {
 
   return (
     <Layout isWrapped>
+      <CategoryMeta category={category} />
+
       <h1 className="title title--display">{category.name}</h1>
 
       <h2 className="subtitle">{category.description}</h2>
@@ -33,6 +36,7 @@ export const postQuery = graphql`
       name
       slug
       description
+      feature_image
       count {
         posts
       }
