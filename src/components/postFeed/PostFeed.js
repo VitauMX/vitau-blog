@@ -3,7 +3,6 @@ import PostPreview from '../postPreview/PostPreview'
 import './postFeed.scss'
 
 const PostFeed = ({ posts }) => {
-  console.log(posts)
   return (
     <section className="postFeed container">
       <h3 className="title title--big">Artículos más recientes</h3>
