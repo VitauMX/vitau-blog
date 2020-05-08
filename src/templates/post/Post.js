@@ -2,7 +2,7 @@ import React from 'react'
 import dayjs from 'dayjs'
 import 'dayjs/locale/es'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 
 import Layout from '../../components/layout/Layout'
 import './post.scss'
@@ -17,7 +17,9 @@ const Post = ({ data, location }) => {
   return (
     <Layout>
       <article className="post container">
-        <p className="post-category">{post.primary_tag.name}</p>
+        <Link to={post.primary_tag.slug} className="post-category">
+          {post.primary_tag.name}
+        </Link>
 
         <h1 className="title title--displayBig">{post.title}</h1>
 
@@ -53,6 +55,7 @@ export const postQuery = graphql`
       reading_time
       primary_tag {
         name
+        slug
       }
     }
   }
