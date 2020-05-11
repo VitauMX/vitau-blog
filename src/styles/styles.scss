@@ -8,7 +8,6 @@
 * Settings
 */
 @import './settings/fonts.scss';
-@import './settings/colors.scss';
 @import './settings/spacing.scss';
 @import './settings/settings.scss';
 
@@ -18,15 +17,7 @@
 @import './globals/boxModel.scss';
 @import './globals/body.scss';
 @import './globals/typography.scss';
-
-figure {
-  display: flex;
-  align-items: flex-start;
-
-  img {
-    width: 100%;
-  }
-}
+@import './globals/figure.scss';
 
 .container {
   padding-right: calc(50vw - (95% / 2));
@@ -44,7 +35,7 @@ figure {
 }
 
 .link {
-  color: var(--brand-blue);
+  color: var(--brand-blue-shadow);
   transition: color 150ms ease-in-out;
 
   &:hover {

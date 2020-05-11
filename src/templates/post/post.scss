@@ -1,22 +1,46 @@
-.post {
+.post,
+.post-content {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.post {
+  .title,
+  &-meta {
+    text-align: center;
+  }
 
   h1,
   h2,
-  h3 {
-    max-width: 700px;
+  h3,
+  p,
+  ul {
+    width: 100%;
+    max-width: 650px;
   }
 
-  .title {
-    text-align: center;
-    line-height: 1;
+  h2,
+  h3 {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: var(--type-scale-40);
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: var(--type-scale-50);
+    margin-bottom: 2rem;
+  }
+
+  p + h2,
+  p + h3 {
+    margin-top: 4rem;
   }
 
   &-category,
   &-meta {
-    font-size: 14px;
+    font-size: var(--type-scale-20);
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 2px;
@@ -25,62 +49,43 @@
   &-category {
     text-decoration: none;
     margin-bottom: 2rem;
-    color: var(--brand-blue);
   }
 
   &-meta {
-    color: var(--grey-50);
     margin-top: 1rem;
-    text-align: center;
+    color: var(--grey-40);
   }
 
+  figure,
   &-featureImage {
     margin: 4rem 0;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-}
-
-.post-content {
-  h2,
-  h3 {
-    font-family: var(--font-primary);
-    font-weight: 700;
-    color: var(--grey-90);
-    font-size: var(--type-scale-40);
   }
 
-  h2 {
-    font-size: var(--type-scale-50);
-    color: var(--grey-90);
-    margin-bottom: 2rem;
-  }
-
-  h3 {
-    font-family: var(--font-primary);
-    margin-bottom: 1rem;
-  }
-
-  p,
-  li {
-    font-size: var(--text-scale-2);
-    line-height: 1.5;
-    width: auto;
-    max-width: 700px;
-    color: var(--grey-90);
-  }
-
-  p + p {
-    margin-top: 2rem;
-  }
-
-  p + h2,
-  p + h3 {
+  &-meta + &-content {
     margin-top: 4rem;
+  }
+
+  a {
+    color: var(--brand-blue-shadow);
+    transition: color 150ms ease-in-out;
+
+    &:hover {
+      color: var(--brand-blue-tint);
+    }
   }
 
   ul {
     margin: 0;
   }
+
+  li {
+    line-height: 1.5;
+  }
 }
+
+// .post-content {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+
+// }
