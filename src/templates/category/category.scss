@@ -3,4 +3,8 @@
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+
+  @media only screen and (max-width: 430px) {
+    grid-template-columns: 1fr;
+  }
 }

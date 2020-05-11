@@ -40,6 +40,10 @@ h6 {
     font-size: var(--type-scale-100);
     letter-spacing: -2px;
     line-height: 1;
+
+    @media only screen and (max-width: 900px) {
+      font-size: var(--type-scale-70);
+    }
   }
 
   &--display {
