@@ -7,7 +7,7 @@ const CategoryMeta = ({ category }) => {
     query {
       site {
         siteMetadata {
-          url
+          siteUrl
         }
       }
     }

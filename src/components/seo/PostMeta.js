@@ -7,7 +7,7 @@ const PostMeta = ({ post }) => {
     query {
       site {
         siteMetadata {
-          url
+          siteUrl
         }
       }
     }

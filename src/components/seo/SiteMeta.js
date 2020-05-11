@@ -7,7 +7,7 @@ const SiteMeta = () => {
     query {
       site {
         siteMetadata {
-          url
+          siteUrl
         }
       }
       allGhostSettings {
