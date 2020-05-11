@@ -35,14 +35,9 @@
 
   &-featureImage {
     margin: 4rem 0;
-    display: flex;
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow);
-
-    img {
-      width: 100%;
-    }
   }
 }
 

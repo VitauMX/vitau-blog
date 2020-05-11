@@ -18,6 +18,15 @@
 @import './globals/body.scss';
 @import './globals/typography.scss';
 
+figure {
+  display: flex;
+  align-items: flex-start;
+
+  img {
+    width: 100%;
+  }
+}
+
 .container {
   padding-right: calc(50vw - (95% / 2));
   padding-left: calc(50vw - (95% / 2));
