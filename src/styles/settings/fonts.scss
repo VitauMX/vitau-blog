@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'Galano Grotesque Alt';
+  src: url('/fonts/GalanoGrotesqueAlt-Light.woff2') format('woff2'),
+    url('/fonts/GalanoGrotesqueAlt-Light.woff') format('woff'),
+    url('/fonts/GalanoGrotesqueAlt-Light.svg#GalanoGrotesqueAlt-Light')
+      format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Galano Grotesque Alt';
+  src: url('/fonts/GalanoGrotesqueAlt-LightItalic.woff2') format('woff2'),
+    url('/fonts/GalanoGrotesqueAlt-LightItalic.woff') format('woff'),
+    url('/fonts/GalanoGrotesqueAlt-LightItalic.svg#GalanoGrotesqueAlt-LightItalic')
+      format('svg');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Galano Grotesque Alt';
+  src: url('/fonts/GalanoGrotesqueAlt-Regular.woff2') format('woff2'),
+    url('/fonts/GalanoGrotesqueAlt-Regular.woff') format('woff'),
+    url('/fonts/GalanoGrotesqueAlt-Regular.svg#GalanoGrotesqueAlt-Regular')
+      format('svg');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Galano Grotesque Alt';
+  src: url('/fonts/GalanoGrotesqueAlt-Italic.woff2') format('woff2'),
+    url('/fonts/GalanoGrotesqueAlt-Italic.woff') format('woff'),
+    url('/fonts/GalanoGrotesqueAlt-Italic.svg#GalanoGrotesqueAlt-Italic')
+      format('svg');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Galano Grotesque Alt';
+  src: url('/fonts/GalanoGrotesqueAlt-Bold.woff2') format('woff2'),
+    url('/fonts/GalanoGrotesqueAlt-Bold.woff') format('woff'),
+    url('/fonts/GalanoGrotesqueAlt-Bold.svg#GalanoGrotesqueAlt-Bold')
+      format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Galano Grotesque Alt';
+  src: url('/fonts/GalanoGrotesqueAlt-BoldItalic.woff2') format('woff2'),
+    url('/fonts/GalanoGrotesqueAlt-BoldItalic.woff') format('woff'),
+    url('/fonts/GalanoGrotesqueAlt-BoldItalic.svg#GalanoGrotesqueAlt-BoldItalic')
+      format('svg');
+  font-weight: 700;
+  font-style: italic;
+}

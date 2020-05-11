@@ -32,7 +32,18 @@ module.exports = {
         background_color: `#022a3b`,
         theme_color: `#00aaff`,
         display: `minimal-ui`,
-        icon: `src/images/favicon.png`, // This path is relative to the root of the site.
+        icon: `src/images/favicon.png`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Open Sans:300,400,400i,600,700,800'],
+        },
+        custom: {
+          families: ['Galano Grotesque Alt'],
+        },
       },
     },
     {
@@ -53,8 +64,6 @@ module.exports = {
         contentApiKey: process.env.GHOST_API_KEY,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
   ],
 }
