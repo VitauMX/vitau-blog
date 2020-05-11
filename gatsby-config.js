@@ -39,7 +39,7 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Open Sans:300,400,400i,600,700,800'],
+          families: ['Open Sans:300,400,400i,600,700,800&display=swap'],
         },
         custom: {
           families: ['Galano Grotesque Alt'],
