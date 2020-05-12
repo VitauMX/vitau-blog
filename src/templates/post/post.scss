@@ -25,17 +25,27 @@
     font-family: var(--font-primary);
     font-weight: 700;
     font-size: var(--type-scale-40);
-    margin-bottom: 1rem;
   }
 
   h2 {
     font-size: var(--type-scale-50);
-    margin-bottom: 2rem;
   }
 
   p + h2,
   p + h3 {
     margin-top: 4rem;
+  }
+
+  h2 + * {
+    margin-top: 2rem;
+  }
+
+  h3 + * {
+    margin-top: 1rem;
+  }
+
+  p {
+    font-size: 18px;
   }
 
   &-category,
