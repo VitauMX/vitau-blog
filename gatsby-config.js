@@ -12,6 +12,15 @@ module.exports = {
     siteUrl: `http://beta-blog.vitau.mx`,
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: 'GTM-N6RPTNB',
+        includeInDevelopment: false,
+        defaultDataLayer: { platform: 'gatsby' },
+        enableWebVitalsTracking: true,
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
