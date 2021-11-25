@@ -18,8 +18,8 @@ const Footer = () => {
           </Link>
 
           <p className="footer-direction">
-            Av. de la Industria 300, Punto Central Local PB C-11, CP 66279, San
-            Pedro Garza García, N.L.
+            Gral. Pablo González Garza #620,
+            Chepevera , Monterrey N.L. 64030
           </p>
         </div>
 
@@ -30,9 +30,9 @@ const Footer = () => {
 
           <a
             className="footer-tel"
-            href="https://wa.me/525550180585?text=Estoy%20interesado,%20me%20podrían%20dar%20más%20información"
+            href="https://wa.me/8001200399?text=Estoy%20interesado,%20me%20podrían%20dar%20más%20información"
           >
-            (55) 5018 0585
+            (800) 120 0399
           </a>
         </div>
       </div>
