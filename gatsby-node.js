@@ -1,4 +1,5 @@
 const path = require(`path`)
+const { samplePosts, sampleCategories } = require('./src/data/samplePosts.js')
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
@@ -29,8 +30,11 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // Extract query results
-  const posts = result.data.allGhostPost.edges
-  const categories = result.data.allGhostTag.edges
+  const apiPosts = result.data?.allGhostPost?.edges || []
+  const apiCategories = result.data?.allGhostTag?.edges || []
+
+  const posts = apiPosts.length > 0 ? apiPosts : samplePosts.map(post => ({ node: post }))
+  const categories = apiCategories.length > 0 ? apiCategories : sampleCategories.map(cat => ({ node: cat }))
 
   // Load templates
   const postTemplate = path.resolve(`./src/templates/post/Post.js`)
@@ -49,15 +53,24 @@ exports.createPages = async ({ graphql, actions }) => {
         // Data passed to context is available
         // in page queries as GraphQL variables.
         slug: node.slug,
+        // For sample data we need to pass the full post object
+        samplePost: apiPosts.length === 0 ? node : null,
       },
     })
   })
 
-  // Create each post page
+  // Create each category page
   categories.forEach(({ node }) => {
-    // This part here defines, that our posts will use
+    // This part here defines, that our categories will use
     // a `/:slug/` permalink.
     node.url = `/${node.slug}/`
+
+    // Get posts for this category (for sample data)
+    const categoryPosts = apiPosts.length === 0 
+      ? samplePosts
+          .filter(post => post.primary_tag.slug === node.slug)
+          .map(post => ({ node: post }))
+      : []
 
     createPage({
       path: node.url,
@@ -66,6 +79,9 @@ exports.createPages = async ({ graphql, actions }) => {
         // Data passed to context is available
         // in page queries as GraphQL variables.
         slug: node.slug,
+        // For sample data we need to pass the full category object and its posts
+        sampleCategory: apiPosts.length === 0 ? node : null,
+        sampleCategoryPosts: categoryPosts,
       },
     })
   })

@@ -7,8 +7,7 @@ import { Link } from 'gatsby'
 import './postPreview.scss'
 
 const PostPreview = ({ post }) => {
-  // Handle cases where post data might be incomplete
-  if (!post) return null;
+  if (!post) return nusrc/components/seo/CategoryMeta.jsl;
   
   dayjs.extend(localizedFormat)
 

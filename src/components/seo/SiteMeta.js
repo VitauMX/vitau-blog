@@ -22,7 +22,6 @@ const SiteMeta = () => {
     }
   `)
 
-  // Add fallback values when Ghost data is not available
   const ghostSettings = data.allGhostSettings?.edges?.[0]?.node || {
     title: 'Vitau Blog',
     description: 'Blog de Vitau sobre salud y bienestar',
