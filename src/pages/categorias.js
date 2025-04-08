@@ -26,7 +26,8 @@ const Categories = () => {
     }
   `)
 
-  const categories = data.allGhostTag.edges
+  // Add fallback when Ghost data is not available
+  const categories = data.allGhostTag?.edges || []
 
   return (
     <Layout>

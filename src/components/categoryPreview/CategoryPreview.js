@@ -4,14 +4,18 @@ import { Link } from 'gatsby'
 import './categoryPreview.scss'
 
 const CategoryPreview = ({ category }) => {
-  const styles = { backgroundImage: 'url(' + category.feature_image + ')' }
-  const article = category.count.posts > 1 ? 'artículos' : 'artículo'
+  // Handle cases where category data might be incomplete
+  if (!category) return null;
+  
+  const styles = category.feature_image ? { backgroundImage: `url(${category.feature_image})` } : {}
+  const postCount = category.count?.posts || 0
+  const article = postCount > 1 ? 'artículos' : 'artículo'
 
   return (
     <Link to={`/${category.slug}`} className="categoryPreview" style={styles}>
       <h2 className="title">{category.name}</h2>
       <p className="text">
-        {category.count.posts} {article}
+        {postCount} {article}
       </p>
     </Link>
   )

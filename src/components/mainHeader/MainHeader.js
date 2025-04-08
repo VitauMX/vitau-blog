@@ -20,7 +20,13 @@ const MainHeader = () => {
     }
   `)
 
-  const site = data.allGhostSettings.edges[0].node
+  // Add fallback when Ghost data is not available
+  const ghostSettings = data.allGhostSettings?.edges?.[0]?.node || {
+    navigation: [
+      { label: 'Inicio', url: '/' },
+      { label: 'Categorías', url: '/categorias' }
+    ]
+  }
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -36,7 +42,7 @@ const MainHeader = () => {
 
       <nav className={mainNavStyles}>
         <div className="mainNav-content">
-          {site.navigation.map((navItem, i) => {
+          {ghostSettings.navigation.map((navItem, i) => {
             if (navItem.url.match(/^\s?http(s?)/gi)) {
               return (
                 <a

@@ -7,12 +7,16 @@ import { Link } from 'gatsby'
 import './postPreview.scss'
 
 const PostPreview = ({ post }) => {
+  // Handle cases where post data might be incomplete
+  if (!post) return null;
+  
   dayjs.extend(localizedFormat)
 
-  const publishedAt = dayjs(post.published_at).locale('es').format('LL', 'es')
-  const minute = post.reading_time > 1 ? 'minutos' : 'minuto'
+  const publishedAt = post.published_at ? dayjs(post.published_at).locale('es').format('LL', 'es') : ''
+  const readingTime = post.reading_time || 0
+  const minute = readingTime > 1 ? 'minutos' : 'minuto'
 
-  const styles = { backgroundImage: 'url(' + post.feature_image + ')' }
+  const styles = post.feature_image ? { backgroundImage: `url(${post.feature_image})` } : {}
 
   return (
     <Link className="postPreview" to={`/${post.slug}`}>
@@ -21,10 +25,10 @@ const PostPreview = ({ post }) => {
           <div className="postPreview-category">{post.primary_tag.name}</div>
         )}
 
-        <h4 className="postPreview-title">{post.title}</h4>
+        <h4 className="postPreview-title">{post.title || 'Sin título'}</h4>
 
         <div className="postPreview-meta">
-          {publishedAt} | {post.reading_time} {minute}
+          {publishedAt} | {readingTime} {minute}
         </div>
       </article>
     </Link>
