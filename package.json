@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Vitau <hola@vitau.mx>",
   "engines": {
-    "node": "^16.14.0"
+    "node": "^18.20.8"
   },
   "dependencies": {
     "classnames": "^2.2.6",

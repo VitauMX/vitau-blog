@@ -21,14 +21,33 @@ const MainHeader = () => {
     }
   `)
 
-  // Add fallback when Ghost data is not available
-  const ghostSettings = data.allGhostSettings?.edges?.[0]?.node || {
-    navigation: [
-      { label: 'Inicio', url: '/' },
-      { label: 'Categorías', url: '/categorias' },
-      { label: 'Farmacia', url: 'https://vitau.mx/?resultado=' }
-    ]
-  }
+  // Ensure we have local paths for internal navigation regardless of Ghost CMS settings
+  const localNavigation = [
+    { label: 'Inicio', url: '/' },
+    { label: 'Categorías', url: '/categorias' },
+    { label: 'Farmacia', url: 'https://vitau.mx/?resultado=' }
+  ];
+
+  // Either use the local navigation or process/clean the Ghost navigation
+  const ghostNavigation = data.allGhostSettings?.edges?.[0]?.node?.navigation || localNavigation;
+  
+  // Process navigation to ensure Categorías always points to the internal page
+  // and Farmacia points to the correct external URL
+  const processedNavigation = ghostNavigation.map(item => {
+    // Ensure Categorías always points to the internal page
+    if (item.label === 'Categorías') {
+      return { ...item, url: '/categorias' };
+    }
+    // Ensure Farmacia always points to the correct URL
+    if (item.label === 'Farmacia') {
+      return { ...item, url: 'https://vitau.mx/?resultado=' };
+    }
+    return item;
+  });
+
+  const ghostSettings = {
+    navigation: processedNavigation
+  };
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -45,7 +64,7 @@ const MainHeader = () => {
       <nav className={mainNavStyles}>
         <div className="mainNav-content">
           {ghostSettings.navigation.map((navItem, i) => {
-            if (navItem.url.match(/^\s?http(s?)/gi)) {
+            if (navItem.label === 'Farmacia') {
               return (
                 <a
                   className="mainNav-link"
