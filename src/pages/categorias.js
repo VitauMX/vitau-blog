@@ -6,8 +6,10 @@ import Hero from '../components/hero/Hero'
 import CategoryPreview from '../components/categoryPreview/CategoryPreview'
 import './categorias.scss'
 import { Helmet } from 'react-helmet'
+import { sampleCategories } from '../data/samplePosts.js'
 
 const Categories = () => {
+  // Always call useStaticQuery unconditionally at the top level
   const data = useStaticQuery(graphql`
     query {
       allGhostTag(sort: { order: ASC, fields: name }) {
@@ -26,7 +28,11 @@ const Categories = () => {
     }
   `)
 
-  const categories = data.allGhostTag.edges
+  // Safely access API data with fallback to empty array
+  const apiCategories = data.allGhostTag?.edges || []
+  
+  // Use sample categories if no categories are available from the API
+  const categories = apiCategories.length > 0 ? apiCategories : sampleCategories.map(cat => ({ node: cat }))
 
   return (
     <Layout>

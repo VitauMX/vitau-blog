@@ -7,9 +7,13 @@ import CategoryMeta from '../../components/seo/CategoryMeta'
 
 import './category.scss'
 
-const Category = ({ data, location }) => {
-  const category = data.ghostTag
-  const posts = data.allGhostPost.edges
+const Category = ({ data, pageContext }) => {
+  const category = pageContext.sampleCategory || (data && data.ghostTag) || {};
+  
+  const apiPosts = data && data.allGhostPost ? data.allGhostPost.edges : [];
+  const posts = pageContext.sampleCategoryPosts && pageContext.sampleCategoryPosts.length > 0
+    ? pageContext.sampleCategoryPosts
+    : apiPosts;
 
   return (
     <Layout isWrapped>

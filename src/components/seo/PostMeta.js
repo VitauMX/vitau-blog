@@ -13,17 +13,17 @@ const PostMeta = ({ post }) => {
     }
   `)
 
-  const {
-    title,
-    meta_title,
-    meta_description,
-    slug,
-    excerpt,
-    feature_image,
-  } = post
-  const { url } = data.site.siteMetadata
-
-  const canonical = `${url}/${slug}`
+  if (!post) return null;
+  
+  const title = post.title || 'Artículo de Blog';
+  const meta_title = post.meta_title;
+  const meta_description = post.meta_description;
+  const slug = post.slug || '';
+  const excerpt = post.excerpt || 'Artículo del blog de Vitau sobre salud y bienestar';
+  const feature_image = post.feature_image;
+  
+  const siteUrl = data.site?.siteMetadata?.siteUrl || '';
+  const canonical = `${siteUrl}/${slug}`;
 
   return (
     <Helmet>
@@ -39,8 +39,8 @@ const PostMeta = ({ post }) => {
       <meta name="twitter:description" content={meta_description || excerpt} />
       <meta name="twitter:url" content={canonical} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content={feature_image} />
-      <meta property="og:image" content={feature_image} />
+      {feature_image && <meta name="twitter:image" content={feature_image} />}
+      {feature_image && <meta property="og:image" content={feature_image} />}
     </Helmet>
   )
 }

@@ -22,8 +22,14 @@ const SiteMeta = () => {
     }
   `)
 
-  const { title, description, lang } = data.allGhostSettings.edges[0].node
-  const { url } = data.site
+  const ghostSettings = data.allGhostSettings?.edges?.[0]?.node || {
+    title: 'Vitau Blog',
+    description: 'Blog de Vitau sobre salud y bienestar',
+    lang: 'es'
+  }
+  
+  const { title, description, lang } = ghostSettings
+  const url = data.site?.siteMetadata?.siteUrl || ''
 
   return (
     <Helmet>

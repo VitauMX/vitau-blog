@@ -26,7 +26,8 @@ const IndexPage = () => {
     }
   `)
 
-  const posts = data.allGhostPost.edges
+  // Add fallback when Ghost data is not available
+  const posts = data.allGhostPost?.edges || []
 
   return (
     <Layout>
