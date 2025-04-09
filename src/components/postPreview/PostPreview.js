@@ -7,7 +7,7 @@ import { Link } from 'gatsby'
 import './postPreview.scss'
 
 const PostPreview = ({ post }) => {
-  if (!post) return nusrc/components/seo/CategoryMeta.jsl;
+  if (!post) return null;
   
   dayjs.extend(localizedFormat)
 
