@@ -30,6 +30,7 @@ const MainHeader = () => {
 
   return (
     <header className="mainHeader container">
+      
       <Link to="/" className="mainHeader-logo">
         <img src={logo} alt="Vitau logo" />
       </Link>
