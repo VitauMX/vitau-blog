@@ -9,7 +9,7 @@ module.exports = {
     title: `Vitau | Blog`,
     description: `Salud, nutrición, hábitos, cuidado personal y más maneras de ser la mejor versión de nosotros mismos.`,
     author: `Vitau Médical`,
-    siteUrl: `http://beta-blog.vitau.mx`,
+    siteUrl: `https://blog.vitau.mx`,
   },
   plugins: [
     {

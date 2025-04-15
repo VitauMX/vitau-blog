@@ -21,9 +21,9 @@ const PostMeta = ({ post }) => {
     excerpt,
     feature_image,
   } = post
-  const { url } = data.site.siteMetadata
+  const { siteUrl } = data.site.siteMetadata
 
-  const canonical = `${url}/${slug}`
+  const canonical = `${siteUrl}/${slug}`
 
   return (
     <Helmet>
