@@ -23,22 +23,22 @@ const SiteMeta = () => {
   `)
 
   const { title, description, lang } = data.allGhostSettings.edges[0].node
-  const { url } = data.site
+  const { siteUrl } = data.site.siteMetadata
 
   return (
     <Helmet>
       <html lang={lang} />
       <title>{title}</title>
       <meta name="description" content={description} />
-      <link rel="canonical" href={url} />
+      <link rel="canonical" href={siteUrl} />
       <meta property="og:site_name" content={title} />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:url" content={url} />
+      <meta property="og:url" content={siteUrl} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:url" content={url} />
+      <meta name="twitter:url" content={siteUrl} />
       <link
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
         rel="stylesheet"

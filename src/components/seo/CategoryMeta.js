@@ -14,8 +14,8 @@ const CategoryMeta = ({ category }) => {
   `)
 
   const { name, slug, description, feature_image } = category
-  const { url } = data.site.siteMetadata
-  const canonical = `${url}/${slug}`
+  const { siteUrl } = data.site.siteMetadata
+  const canonical = `${siteUrl}/${slug}`
   const title = `${name} | Vitau Blog`
 
   return (
