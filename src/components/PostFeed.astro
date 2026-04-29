@@ -39,8 +39,8 @@ const { posts } = Astro.props
     .postFeed-content {
       grid-template-columns: repeat(3, 1fr);
     }
-    .postFeed-content :global(.postPreview:nth-child(3n+1)),
-    .postFeed-content :global(.postPreview:nth-child(3n-1)) {
+    .postFeed-content :global(.postPreview:nth-child(4n+1)),
+    .postFeed-content :global(.postPreview:nth-child(4n+4)) {
       grid-column-end: span 2;
     }
   }
