@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro'
 import Layout from '../../components/Layout.astro'
-import { getAllPosts, formatDate, readingTimeLabel, getPostSlug } from '../../lib/content'
+import { getAllPosts, formatDate, readingTimeLabel, getPostSlug, type Post } from '../../lib/content'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getAllPosts()
@@ -11,12 +11,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }))
 }
 
+interface Props { post: Post }
 const { post } = Astro.props
-const { title, featureImage, publishedAt, readingTime, tag, metaTitle, metaDescription, excerpt } =
+const { title, featureImage, publishedAt, readingTime, tag, metaTitle, metaDescription, excerpt, html } =
   post.data
 
 const canonicalUrl = new URL(`/blog/${getPostSlug(post)}/`, 'https://vitau.mx').href
-const { Content } = await post.render()
 
 const schema = {
   '@context': 'https://schema.org',
@@ -61,7 +61,7 @@ const schema = {
     )}
 
     <section class="post-content">
-      <Content />
+      <Fragment set:html={html} />
     </section>
   </article>
 </Layout>

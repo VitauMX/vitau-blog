@@ -1,7 +1,13 @@
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content'
 
 export type Post = CollectionEntry<'posts'>
-export type Tag = CollectionEntry<'tags'>
+
+export type Tag = {
+  id: string
+  name: string
+  slug: string
+  postCount: number
+}
 
 /** All posts sorted newest first */
 export async function getAllPosts(): Promise<Post[]> {
@@ -17,10 +23,22 @@ export async function getPost(slug: string): Promise<Post | undefined> {
   return getEntry('posts', slug)
 }
 
-/** All tags */
+/** Tags derived from published posts */
 export async function getAllTags(): Promise<Tag[]> {
-  const tags = await getCollection('tags')
-  return tags.sort((a, b) => a.data.name.localeCompare(b.data.name, 'es'))
+  const posts = await getAllPosts()
+  const map = new Map<string, Tag>()
+  for (const post of posts) {
+    if (post.data.tag) {
+      const { name, slug } = post.data.tag
+      const existing = map.get(slug)
+      if (existing) {
+        existing.postCount++
+      } else {
+        map.set(slug, { id: slug, name, slug, postCount: 1 })
+      }
+    }
+  }
+  return [...map.values()].sort((a, b) => a.name.localeCompare(b.name, 'es'))
 }
 
 /** Posts filtered by tag slug */
@@ -29,9 +47,9 @@ export async function getPostsByTag(tagSlug: string): Promise<Post[]> {
   return posts.filter((p) => p.data.tag?.slug === tagSlug)
 }
 
-/** Slug without file extension, safe for use in URLs */
+/** Slug for use in URLs */
 export function getPostSlug(post: Post): string {
-  return post.id.replace(/\.(md|mdx)$/, '')
+  return post.data.slug
 }
 
 /** Format a date in Spanish */

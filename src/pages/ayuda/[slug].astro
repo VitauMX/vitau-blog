@@ -37,11 +37,6 @@ const pageTitle = props.type === 'category'
   ? `${props.category.name} | Centro de Ayuda Vitau`
   : `${props.article.data.title} | Centro de Ayuda Vitau`
 
-let Content: any = null
-if (props.type === 'article') {
-  const rendered = await props.article.render()
-  Content = rendered.Content
-}
 ---
 
 <AyudaLayout title={pageTitle}>
@@ -99,7 +94,7 @@ if (props.type === 'article') {
           </div>
         )}
 
-        {props.type === 'article' && Content && (
+        {props.type === 'article' && (
           <article>
             <nav class="ayuda-breadcrumb">
               <a href="/ayuda">Centro de Ayuda</a>
@@ -109,7 +104,7 @@ if (props.type === 'article') {
               <span>{props.article.data.title}</span>
             </nav>
             <h1 class="ayuda-article-title">{props.article.data.title}</h1>
-            <div class="ayuda-article-body"><Content /></div>
+            <div class="ayuda-article-body"><Fragment set:html={props.article.data.html} /></div>
             <div class="ayuda-feedback">
               <p>¿Te resultó útil este artículo?</p>
               <div class="ayuda-feedback-actions">

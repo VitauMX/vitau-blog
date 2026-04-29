@@ -34,5 +34,5 @@ export async function getAllAyudaArticles(): Promise<AyudaArticle[]> {
 }
 
 export function getAyudaSlug(article: AyudaArticle): string {
-  return article.id.replace(/\.(md|mdx)$/, '')
+  return article.data.slug
 }

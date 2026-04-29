@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from 'astro'
 import Layout from '../../components/Layout.astro'
 import PostFeed from '../../components/PostFeed.astro'
-import { getAllTags, getPostsByTag } from '../../lib/content'
+import { getAllTags, getPostsByTag, type Tag } from '../../lib/content'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const tags = await getAllTags()
@@ -12,17 +12,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }))
 }
 
+interface Props { tag: Tag }
 const { tag } = Astro.props
-const posts = await getPostsByTag(tag.data.slug)
+const posts = await getPostsByTag(tag.slug)
 ---
 
 <Layout
-  title={`${tag.data.name} | Vitau Blog`}
-  description={`Artículos sobre ${tag.data.name} en el blog de Vitau.`}
+  title={`${tag.name} | Vitau Blog`}
+  description={`Artículos sobre ${tag.name} en el blog de Vitau.`}
   isWrapped={false}
 >
   <section class="category-header wrap">
-    <h1 class="title title--big">{tag.data.name}</h1>
+    <h1 class="title title--big">{tag.name}</h1>
     <p class="subtitle">{posts.length} {posts.length === 1 ? 'artículo' : 'artículos'}</p>
   </section>
 

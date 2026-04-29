@@ -6,15 +6,11 @@ interface Props {
 }
 
 const { tag } = Astro.props
-const { name, slug, featureImage, postCount } = tag.data
+const { name, slug, postCount } = tag
 const article = postCount === 1 ? 'artículo' : 'artículos'
 ---
 
-<a
-  href={`/blog/${slug}`}
-  class="categoryPreview"
-  style={featureImage ? `background-image: url(${featureImage})` : undefined}
->
+<a href={`/blog/${slug}`} class="categoryPreview">
   <h2 class="title">{name}</h2>
   <p class="text">{postCount} {article}</p>
 </a>
