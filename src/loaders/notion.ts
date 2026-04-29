@@ -206,7 +206,7 @@ async function queryPublished(notion: Client, dbId: string): Promise<AnyPage[]> 
     await delay(350)
     const res = await notion.dataSources.query({
       data_source_id: dbId,
-      filter: { property: 'Status', status: { equals: 'Published' } },
+      filter: { property: 'Status', status: { equals: 'Listo' } },
       start_cursor: cursor,
       page_size: 100,
     })

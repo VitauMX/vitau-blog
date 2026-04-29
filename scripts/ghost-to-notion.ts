@@ -350,7 +350,7 @@ async function createPost(post: GhostPost, tags: string[]): Promise<void> {
   const properties: Record<string, unknown> = {
     Name: { title: [{ type: 'text', text: { content: post.title } }] },
     Slug: { rich_text: [{ type: 'text', text: { content: post.slug } }] },
-    Status: { status: { name: 'Published' } },
+    Status: { status: { name: 'Listo' } },
     PublishedAt: { date: { start: post.published_at } },
     Tags: { multi_select: tags.map(name => ({ name })) },
   }
@@ -372,7 +372,7 @@ async function createPost(post: GhostPost, tags: string[]): Promise<void> {
 
   await delay(350)
   const page = await notion.pages.create({
-    parent: { database_id: DB_ID! } as any,
+    parent: { type: 'data_source_id', data_source_id: DB_ID! } as any,
     properties: properties as any,
     children: firstBatch as any,
   })
