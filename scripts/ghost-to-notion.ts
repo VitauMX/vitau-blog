@@ -141,11 +141,14 @@ function nodeToRichText(el: HTMLElement): RichTextItem[] {
 
     if (tag === 'a') {
       const href = node.getAttribute('href') ?? ''
+      const validHref = href.startsWith('http://') || href.startsWith('https://') || href.startsWith('/')
+        ? href.replace(/__GHOST_URL__/g, 'https://blog-admin.vitau.mx')
+        : ''
       const innerItems = nodeToRichText(node)
       for (const item of innerItems) {
         items.push({
           ...item,
-          text: { ...item.text, link: href ? { url: href } : undefined },
+          text: { ...item.text, link: validHref ? { url: validHref } : undefined },
         })
       }
     } else if (tag === 'strong' || tag === 'b') {
@@ -345,7 +348,8 @@ async function getExistingSlugs(): Promise<Set<string>> {
 }
 
 async function createPost(post: GhostPost, tags: string[]): Promise<void> {
-  const blocks = htmlToBlocks(post.html ?? '')
+  const html = (post.html ?? '').replace(/__GHOST_URL__/g, 'https://blog-admin.vitau.mx')
+  const blocks = htmlToBlocks(html)
 
   const properties: Record<string, unknown> = {
     Name: { title: [{ type: 'text', text: { content: post.title } }] },
