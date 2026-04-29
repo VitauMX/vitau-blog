@@ -29,8 +29,10 @@ phases:
           --cache-control "public,max-age=31536000,immutable"
       # Imágenes del blog (descargadas de Notion en build time) — cache inmutable
       - |
-        aws s3 sync dist/blog/images/ s3://blog-vitau/blog/images/ \
-          --cache-control "public,max-age=31536000,immutable"
+        if [ -d dist/blog/images ] && [ "$(ls -A dist/blog/images)" ]; then
+          aws s3 sync dist/blog/images/ s3://blog-vitau/blog/images/ \
+            --cache-control "public,max-age=31536000,immutable"
+        fi
       # Resto de assets (fuentes, robots.txt, etc.)
       - |
         aws s3 sync dist/ s3://blog-vitau/ \
