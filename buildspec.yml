@@ -27,12 +27,17 @@ phases:
         aws s3 sync dist/blog/_astro/ s3://blog-vitau/blog/_astro/ \
           --delete \
           --cache-control "public,max-age=31536000,immutable"
-      # Resto de assets (fuentes, imágenes, robots.txt, etc.)
+      # Imágenes del blog (descargadas de Notion en build time) — cache inmutable
+      - |
+        aws s3 sync dist/blog/images/ s3://blog-vitau/blog/images/ \
+          --cache-control "public,max-age=31536000,immutable"
+      # Resto de assets (fuentes, robots.txt, etc.)
       - |
         aws s3 sync dist/ s3://blog-vitau/ \
           --delete \
           --exclude "*.html" \
           --exclude "blog/_astro/*" \
+          --exclude "blog/images/*" \
           --cache-control "public,max-age=86400"
       # Invalidar rutas del blog y ayuda en CF
       - |
