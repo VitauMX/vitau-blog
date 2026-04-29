@@ -1,54 +1,21 @@
 {
-  "name": "vitau-blog",
-  "private": true,
-  "description": "New blog for Vitau.",
+  "name": "@vitau/app",
   "version": "0.1.0",
-  "author": "Vitau <hola@vitau.mx>",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
   "dependencies": {
-    "classnames": "^2.2.6",
-    "dayjs": "^1.8.26",
-    "gatsby": "^2.21.15",
-    "gatsby-image": "^2.4.2",
-    "gatsby-plugin-google-tagmanager": "^3.10.0",
-    "gatsby-plugin-manifest": "^2.4.2",
-    "gatsby-plugin-offline": "^3.2.1",
-    "gatsby-plugin-react-helmet": "^3.3.1",
-    "gatsby-plugin-sass": "^2.3.1",
-    "gatsby-plugin-sharp": "^2.6.1",
-    "gatsby-plugin-sitemap": "^2.4.2",
-    "gatsby-plugin-web-font-loader": "^1.0.4",
-    "gatsby-source-filesystem": "^2.3.1",
-    "gatsby-source-ghost": "^4.0.4",
-    "gatsby-transformer-sharp": "^2.5.1",
-    "node-sass": "^4.14.1",
-    "normalize.css": "^8.0.1",
-    "postcss-preset-env": "^6.7.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-helmet": "^6.0.0"
+    "astro": "^5.0.0"
   },
   "devDependencies": {
-    "prettier": "2.0.5"
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "@astrojs/check": "latest",
+    "@tailwindcss/vite": "^4.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.0.0"
   }
 }

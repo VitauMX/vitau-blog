@@ -1,0 +1,188 @@
+---
+import type { GetStaticPaths } from 'astro'
+import AyudaLayout from '../../components/AyudaLayout.astro'
+import { ayudaCategories, getAllAyudaArticles, getAyudaSlug, type AyudaArticle } from '../../lib/ayuda'
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allArticles = await getAllAyudaArticles()
+
+  const categoryPaths = ayudaCategories.map((cat) => ({
+    params: { slug: cat.slug },
+    props: {
+      type: 'category' as const,
+      category: cat,
+      articles: allArticles.filter((a) => a.data.category === cat.slug),
+    },
+  }))
+
+  const articlePaths = allArticles.map((article) => ({
+    params: { slug: getAyudaSlug(article) },
+    props: {
+      type: 'article' as const,
+      article,
+      category: ayudaCategories.find((c) => c.slug === article.data.category)!,
+    },
+  }))
+
+  return [...categoryPaths, ...articlePaths]
+}
+
+type Props =
+  | { type: 'category'; category: (typeof ayudaCategories)[number]; articles: AyudaArticle[] }
+  | { type: 'article'; article: AyudaArticle; category: (typeof ayudaCategories)[number] }
+
+const props = Astro.props
+const activeCategory = props.type === 'category' ? props.category.slug : props.article.data.category
+const pageTitle = props.type === 'category'
+  ? `${props.category.name} | Centro de Ayuda Vitau`
+  : `${props.article.data.title} | Centro de Ayuda Vitau`
+
+let Content: any = null
+if (props.type === 'article') {
+  const rendered = await props.article.render()
+  Content = rendered.Content
+}
+---
+
+<AyudaLayout title={pageTitle}>
+  <div class="ayuda-inner-hero">
+    <div class="ayuda-search-wrap">
+      <i class="fas fa-search ayuda-search-icon"></i>
+      <input type="text" placeholder="Buscar artículos de ayuda..." class="ayuda-search-input" />
+    </div>
+  </div>
+
+  <main class="ayuda-inner-main">
+    <div class="ayuda-layout">
+      <aside class="ayuda-sidebar">
+        <div class="ayuda-sidebar-inner">
+          <p class="ayuda-sidebar-label">Centro de Ayuda</p>
+          <nav>
+            {ayudaCategories.map(cat => (
+              <a
+                href={`/ayuda/${cat.slug}`}
+                class={`ayuda-sidebar-link ${activeCategory === cat.slug ? 'ayuda-sidebar-link--active' : ''}`}
+              >
+                <i class={`fas ${cat.icon} ayuda-sidebar-link-icon`}></i>
+                {cat.name}
+              </a>
+            ))}
+          </nav>
+          <div class="ayuda-sidebar-divider"></div>
+          <a href="/ayuda" class="ayuda-sidebar-home">
+            <i class="fas fa-arrow-left"></i> Todas las categorías
+          </a>
+        </div>
+      </aside>
+
+      <div class="ayuda-content">
+        {props.type === 'category' && (
+          <div>
+            <nav class="ayuda-breadcrumb">
+              <a href="/ayuda">Centro de Ayuda</a>
+              <span class="ayuda-breadcrumb-sep">›</span>
+              <span>{props.category.name}</span>
+            </nav>
+            <div class="ayuda-content-header">
+              <div class="ayuda-content-icon"><i class={`fas ${props.category.icon}`}></i></div>
+              <h1 class="ayuda-content-title">{props.category.name}</h1>
+            </div>
+            <p class="ayuda-content-intro">{props.category.description}</p>
+            <div class="ayuda-article-list">
+              {props.articles.map(article => (
+                <a href={`/ayuda/${getAyudaSlug(article)}`} class="ayuda-article-link">
+                  <i class="fas fa-file-alt ayuda-article-link-icon"></i>
+                  {article.data.title}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {props.type === 'article' && Content && (
+          <article>
+            <nav class="ayuda-breadcrumb">
+              <a href="/ayuda">Centro de Ayuda</a>
+              <span class="ayuda-breadcrumb-sep">›</span>
+              <a href={`/ayuda/${props.article.data.category}`}>{props.article.data.categoryName}</a>
+              <span class="ayuda-breadcrumb-sep">›</span>
+              <span>{props.article.data.title}</span>
+            </nav>
+            <h1 class="ayuda-article-title">{props.article.data.title}</h1>
+            <div class="ayuda-article-body"><Content /></div>
+            <div class="ayuda-feedback">
+              <p>¿Te resultó útil este artículo?</p>
+              <div class="ayuda-feedback-actions">
+                <button class="ayuda-feedback-btn">Sí</button>
+                <button class="ayuda-feedback-btn">No</button>
+              </div>
+            </div>
+          </article>
+        )}
+      </div>
+    </div>
+  </main>
+</AyudaLayout>
+
+<style>
+  .ayuda-inner-hero { background: linear-gradient(to bottom, #022a3b, #003b54); padding: 2rem 2rem 3.5rem; }
+  .ayuda-search-wrap { position: relative; max-width: 48rem; margin: 0 auto; }
+  .ayuda-search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; }
+  .ayuda-search-input { width: 100%; padding: 0.75rem 1rem 0.75rem 2.75rem; border-radius: 0.75rem; border: none; font-size: 1rem; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); box-sizing: border-box; font-family: inherit; }
+  .ayuda-search-input:focus { outline: 2px solid #00aaff; }
+
+  .ayuda-inner-main { max-width: 80rem; margin: -2rem auto 0; padding: 0 1.5rem 5rem; position: relative; z-index: 10; flex: 1; }
+
+  .ayuda-layout { display: flex; gap: 2.5rem; align-items: flex-start; }
+
+  .ayuda-sidebar { width: 16rem; flex-shrink: 0; }
+  .ayuda-sidebar-inner { background: white; border-radius: 1rem; border: 1px solid #f1f5f9; box-shadow: 0 1px 3px rgba(0,0,0,0.06); padding: 1.5rem; position: sticky; top: 1.5rem; }
+  .ayuda-sidebar-label { font-weight: 700; color: #022a3b; font-size: 1rem; margin: 0 0 1rem; }
+  .ayuda-sidebar-link { display: flex; align-items: center; gap: 0.5rem; padding: 0.625rem 0.75rem; border-radius: 0.5rem; text-decoration: none; font-size: 0.9375rem; color: #6b7280; transition: background 0.15s, color 0.15s; margin-bottom: 2px; }
+  .ayuda-sidebar-link:hover { background: #f9fafb; color: #022a3b; }
+  .ayuda-sidebar-link--active { background: #e0f2fe; color: #00aaff; font-weight: 600; }
+  .ayuda-sidebar-link-icon { width: 1rem; text-align: center; }
+  .ayuda-sidebar-divider { border-top: 1px solid #f1f5f9; margin: 1rem 0; }
+  .ayuda-sidebar-home { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: #9ca3af; text-decoration: none; transition: color 0.15s; }
+  .ayuda-sidebar-home:hover { color: #022a3b; }
+
+  .ayuda-content { flex: 1; background: white; border-radius: 1rem; border: 1px solid #f1f5f9; box-shadow: 0 1px 3px rgba(0,0,0,0.06); padding: 2.5rem; min-width: 0; }
+
+  .ayuda-breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 0.25rem; font-size: 0.8125rem; color: #9ca3af; margin-bottom: 2rem; }
+  .ayuda-breadcrumb a { color: #9ca3af; text-decoration: none; transition: color 0.15s; }
+  .ayuda-breadcrumb a:hover { color: #00aaff; }
+  .ayuda-breadcrumb span:last-child { color: #6b7280; }
+  .ayuda-breadcrumb-sep { color: #d1d5db; }
+
+  .ayuda-content-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+  .ayuda-content-icon { width: 3rem; height: 3rem; background: #e0f2fe; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: #00aaff; font-size: 1.25rem; flex-shrink: 0; }
+  .ayuda-content-title { font-size: 1.75rem; font-weight: 700; color: #022a3b; margin: 0; }
+  .ayuda-content-intro { color: #6b7280; margin: 0 0 2rem; line-height: 1.6; }
+  .ayuda-article-list { border-top: 1px solid #f1f5f9; }
+  .ayuda-article-link { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 0; border-bottom: 1px solid #f1f5f9; text-decoration: none; color: #022a3b; font-size: 0.9375rem; transition: color 0.15s; }
+  .ayuda-article-link:hover { color: #00aaff; }
+  .ayuda-article-link-icon { color: #d1d5db; font-size: 0.875rem; }
+
+  .ayuda-article-title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: #022a3b; line-height: 1.25; margin: 0 0 2rem; }
+  .ayuda-article-body { font-size: 1rem; line-height: 1.75; color: #374151; }
+  .ayuda-article-body :global(p) { margin: 0 0 1.25rem; }
+  .ayuda-article-body :global(p:last-child) { margin-bottom: 0; }
+  .ayuda-article-body :global(h3) { font-size: 1.25rem; font-weight: 700; color: #022a3b; margin: 2rem 0 0.75rem; }
+  .ayuda-article-body :global(ul), .ayuda-article-body :global(ol) { padding-left: 1.5rem; margin: 0 0 1.25rem; }
+  .ayuda-article-body :global(li) { margin-bottom: 0.5rem; }
+  .ayuda-article-body :global(strong) { font-weight: 700; color: #022a3b; }
+  .ayuda-article-body :global(a) { color: #00aaff; text-decoration: underline; }
+
+  .ayuda-feedback { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #f1f5f9; text-align: center; }
+  .ayuda-feedback p { color: #6b7280; font-weight: 500; margin: 0 0 1rem; }
+  .ayuda-feedback-actions { display: flex; justify-content: center; gap: 1rem; }
+  .ayuda-feedback-btn { padding: 0.5rem 1.5rem; border: 1px solid #e5e7eb; border-radius: 0.375rem; background: white; color: #6b7280; cursor: pointer; font-size: 0.9375rem; transition: background 0.15s, border-color 0.15s; font-family: inherit; }
+  .ayuda-feedback-btn:hover { background: #f9fafb; border-color: #d1d5db; }
+
+  @media (max-width: 768px) {
+    .ayuda-layout { flex-direction: column; }
+    .ayuda-sidebar { width: 100%; }
+    .ayuda-sidebar-inner { position: static; }
+    .ayuda-content { padding: 1.5rem; }
+  }
+</style>

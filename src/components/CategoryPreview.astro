@@ -1,0 +1,43 @@
+---
+import type { Tag } from '../lib/content'
+
+interface Props {
+  tag: Tag
+}
+
+const { tag } = Astro.props
+const { name, slug, featureImage, postCount } = tag.data
+const article = postCount === 1 ? 'artículo' : 'artículos'
+---
+
+<a
+  href={`/blog/${slug}`}
+  class="categoryPreview"
+  style={featureImage ? `background-image: url(${featureImage})` : undefined}
+>
+  <h2 class="title">{name}</h2>
+  <p class="text">{postCount} {article}</p>
+</a>
+
+<style>
+  .categoryPreview {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    background-color: var(--brand-blue);
+    background-size: cover;
+    background-position: center center;
+    text-decoration: none;
+    color: white;
+    min-height: 200px;
+    transition: 200ms all ease-in-out;
+  }
+  .categoryPreview:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-4px);
+  }
+  .categoryPreview .title { color: white; font-size: var(--type-scale-40); }
+  .categoryPreview .text { color: rgba(255,255,255,0.8); margin-top: 0.25rem; }
+</style>

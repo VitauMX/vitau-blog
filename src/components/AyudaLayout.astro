@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Footer from './Footer.astro'
+
+interface Props {
+  title: string
+  description?: string
+}
+
+const { title, description } = Astro.props
+---
+
+<BaseLayout {title} {description}>
+  <div class="ayuda">
+    <nav class="ayuda-nav">
+      <div class="ayuda-nav-inner">
+        <a href="/ayuda">
+          <img src="/blog/vitau-logo-white.svg" alt="Vitau" width="100" height="21" />
+        </a>
+        <a href="https://vitau.mx" class="ayuda-nav-link">Ir a vitau.mx →</a>
+      </div>
+    </nav>
+    <slot />
+    <Footer />
+  </div>
+</BaseLayout>
+
+<style>
+  .ayuda {
+    min-height: 100vh;
+    background: #f8fafc;
+    display: flex;
+    flex-direction: column;
+  }
+  .ayuda-nav {
+    background: #022a3b;
+    border-bottom: 1px solid #003b54;
+    padding: 1rem 2rem;
+  }
+  .ayuda-nav-inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ayuda-nav-link {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .ayuda-nav-link:hover { color: white; }
+</style>

@@ -1,0 +1,89 @@
+---
+import { formatDate, readingTimeLabel, getPostSlug, type Post } from '../lib/content'
+
+interface Props {
+  post: Post
+}
+
+const { post } = Astro.props
+const { title, featureImage, publishedAt, readingTime, tag } = post.data
+---
+
+<a class="postPreview" href={`/blog/${getPostSlug(post)}`}>
+  <article
+    class="postPreview-content"
+    style={featureImage ? `background-image: url(${featureImage})` : undefined}
+  >
+    {tag && (
+      <div class="postPreview-category">{tag.name}</div>
+    )}
+    <h4 class="postPreview-title">{title}</h4>
+    <div class="postPreview-meta">
+      {formatDate(publishedAt)} | {readingTimeLabel(readingTime)}
+    </div>
+  </article>
+</a>
+
+<style>
+  .postPreview {
+    display: flex;
+    border-radius: var(--border-radius);
+    background-color: var(--brand-blue);
+    text-decoration: none;
+    overflow: hidden;
+    color: white;
+    transition: 200ms all ease-in-out;
+  }
+  .postPreview:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-4px);
+  }
+
+  .postPreview-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem;
+    width: 100%;
+    align-self: stretch;
+    background-size: cover;
+    background-position: center center;
+    min-height: 320px;
+  }
+  .postPreview-content > * { z-index: 1; }
+  .postPreview-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(2, 42, 59, 0.8) 0%, rgba(2, 42, 59, 0) 60%);
+  }
+
+  .postPreview-title {
+    margin-top: auto;
+    font-size: var(--type-scale-50);
+    line-height: 1.25;
+    font-weight: 700;
+    color: white;
+  }
+
+  .postPreview-category {
+    padding: 0.25rem 0.75rem;
+    background-color: white;
+    font-size: var(--type-scale-20);
+    font-weight: 800;
+    color: var(--brand-blue);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 100px;
+    line-height: 1;
+  }
+
+  .postPreview-meta {
+    margin-top: 0.5rem;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--grey-30);
+    font-size: 14px;
+  }
+</style>

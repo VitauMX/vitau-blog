@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/* ─── Design tokens ─────────────────────────────────────── */
+:root {
+  --brand-dark-blue-tint: #033c54;
+  --brand-dark-blue: #022a3b;
+  --brand-dark-blue-shadow: #011c27;
+  --brand-blue-tint: #33bbff;
+  --brand-blue: #00aaff;
+  --brand-blue-shadow: #0088cc;
+  --brand-blue-darker-shadow: #006fa6;
+  --brand-orange-tint: #ff7429;
+  --brand-orange: #ff5a00;
+  --brand-orange-shadow: #e65100;
+  --brand-yellow-tint: #ffce33;
+  --brand-yellow: #ffc200;
+  --brand-yellow-shadow: #e6af00;
+  --grey-100: #022a3b;
+  --grey-90: #1b3f4e;
+  --grey-80: #355562;
+  --grey-70: #4d6975;
+  --grey-60: #677f89;
+  --grey-50: #80949d;
+  --grey-40: #9aaab1;
+  --grey-30: #b3bfc4;
+  --grey-20: #ccd4d8;
+  --grey-10: #e5e9eb;
+  --grey-5: #f2f4f5;
+  --grey-0: #f9fafb;
+  --font-primary: 'Galano Grotesque Alt', sans-serif;
+  --font-secondary: 'Open Sans', sans-serif;
+  --shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.14);
+  --typeScale-unit: 1rem;
+  --spaceScale-unit: 1rem;
+  --type-scale-10: calc(var(--typeScale-unit) * 0.75);
+  --type-scale-20: calc(var(--typeScale-unit) * 0.875);
+  --type-scale-30: var(--typeScale-unit);
+  --type-scale-40: calc(var(--typeScale-unit) * 1.5);
+  --type-scale-50: calc(var(--typeScale-unit) * 2);
+  --type-scale-60: calc(var(--typeScale-unit) * 2.5);
+  --type-scale-70: calc(var(--typeScale-unit) * 3);
+  --type-scale-80: calc(var(--typeScale-unit) * 3.5);
+  --type-scale-90: calc(var(--typeScale-unit) * 4);
+  --type-scale-100: calc(var(--typeScale-unit) * 4.5);
+  --space-xxs: calc(var(--spaceScale-unit) * 0.25);
+  --space-xs: calc(var(--spaceScale-unit) * 0.5);
+  --space-s: calc(var(--spaceScale-unit) * 0.75);
+  --space: var(--spaceScale-unit);
+  --space-m: calc(var(--spaceScale-unit) * 1.25);
+  --space-l: calc(var(--spaceScale-unit) * 2);
+  --space-xl: calc(var(--spaceScale-unit) * 3.25);
+  --space-xxl: calc(var(--spaceScale-unit) * 5.25);
+  --border-radius: var(--space-xxs);
+}
+
+/* ─── Font faces ─────────────────────────────────────────── */
+@font-face {
+  font-family: 'Galano Grotesque Alt';
+  src: url('/blog/fonts/GalanoGrotesqueAlt-Light.woff2') format('woff2'),
+    url('/blog/fonts/GalanoGrotesqueAlt-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Galano Grotesque Alt';
+  src: url('/blog/fonts/GalanoGrotesqueAlt-Regular.woff2') format('woff2'),
+    url('/blog/fonts/GalanoGrotesqueAlt-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Galano Grotesque Alt';
+  src: url('/blog/fonts/GalanoGrotesqueAlt-Bold.woff2') format('woff2'),
+    url('/blog/fonts/GalanoGrotesqueAlt-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+body {
+  font-family: var(--font-secondary);
+  font-size: var(--typeScale-unit);
+  color: var(--grey-90);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+}
+
+p, .text { margin: 0; font-size: var(--type-scale-30); font-weight: 400; line-height: 1.5; }
+a { text-decoration: none; }
+
+/* ─── Layout ─────────────────────────────────────────────── */
+.wrap {
+  padding-right: calc(50vw - (95% / 2));
+  padding-left: calc(50vw - (95% / 2));
+}
+@media (min-width: 1180px) {
+  .wrap {
+    padding-right: calc(50vw - (1120px / 2));
+    padding-left: calc(50vw - (1120px / 2));
+  }
+}
+@media (min-width: 1440px) {
+  .wrap {
+    padding-right: calc(50vw - (1180px / 2));
+    padding-left: calc(50vw - (1180px / 2));
+  }
+}
+
+/* ─── Typography helpers ─────────────────────────────────── */
+.title {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  color: var(--grey-90);
+  font-size: var(--type-scale-40);
+  margin: 0;
+}
+.title--displayBig {
+  font-size: var(--type-scale-100);
+  letter-spacing: -2px;
+  line-height: 1;
+}
+@media (max-width: 900px) {
+  .title--displayBig { font-size: var(--type-scale-70); }
+}
+.title--display { font-size: var(--type-scale-80); line-height: 1; }
+.title--big { font-size: var(--type-scale-50); }
+.subtitle { font-weight: 400; color: var(--grey-60); font-size: var(--type-scale-40); }
+.link { color: var(--brand-blue-shadow); transition: color 150ms ease-in-out; }
+.link:hover { color: var(--brand-blue-tint); }

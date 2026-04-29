@@ -1,0 +1,29 @@
+---
+import Layout from '../components/Layout.astro'
+---
+
+<Layout title="Página no encontrada | Vitau Blog">
+  <section class="notFound">
+    <h1 class="title title--display">404</h1>
+    <p class="subtitle">Esta página no existe.</p>
+    <a href="/blog" class="notFound-link">← Volver al blog</a>
+  </section>
+</Layout>
+
+<style>
+  .notFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem;
+    gap: 1.5rem;
+  }
+  .notFound-link {
+    color: var(--brand-blue);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .notFound-link:hover { color: var(--brand-blue-shadow); }
+</style>

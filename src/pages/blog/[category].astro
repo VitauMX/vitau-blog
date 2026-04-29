@@ -1,0 +1,38 @@
+---
+import type { GetStaticPaths } from 'astro'
+import Layout from '../../components/Layout.astro'
+import PostFeed from '../../components/PostFeed.astro'
+import { getAllTags, getPostsByTag } from '../../lib/content'
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const tags = await getAllTags()
+  return tags.map((tag) => ({
+    params: { category: tag.id },
+    props: { tag },
+  }))
+}
+
+const { tag } = Astro.props
+const posts = await getPostsByTag(tag.data.slug)
+---
+
+<Layout
+  title={`${tag.data.name} | Vitau Blog`}
+  description={`Artículos sobre ${tag.data.name} en el blog de Vitau.`}
+  isWrapped={false}
+>
+  <section class="category-header wrap">
+    <h1 class="title title--big">{tag.data.name}</h1>
+    <p class="subtitle">{posts.length} {posts.length === 1 ? 'artículo' : 'artículos'}</p>
+  </section>
+
+  <PostFeed posts={posts} />
+</Layout>
+
+<style>
+  .category-header {
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+  }
+  .category-header .subtitle { margin-top: 0.5rem; }
+</style>

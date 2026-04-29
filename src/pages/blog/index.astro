@@ -1,0 +1,17 @@
+---
+import Layout from '../../components/Layout.astro'
+import Hero from '../../components/Hero.astro'
+import PostFeed from '../../components/PostFeed.astro'
+import { getAllPosts } from '../../lib/content'
+
+const posts = await getAllPosts()
+---
+
+<Layout
+  title="Blog de Salud y Bienestar | Vitau"
+  description="Salud, nutrición, hábitos, cuidado personal y más maneras de ser la mejor versión de nosotros mismos."
+  isWrapped={false}
+>
+  <Hero />
+  <PostFeed posts={posts} />
+</Layout>

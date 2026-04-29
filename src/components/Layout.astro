@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import MainHeader from './MainHeader.astro'
+import Footer from './Footer.astro'
+
+interface Props {
+  title: string
+  description?: string
+  canonicalUrl?: string
+  ogImage?: string
+  publishedAt?: Date | string
+  isWrapped?: boolean
+}
+
+const { title, description, canonicalUrl, ogImage, publishedAt, isWrapped = true } = Astro.props
+---
+
+<BaseLayout {title} {description} {canonicalUrl} {ogImage} {publishedAt}>
+  <slot name="head" slot="head" />
+  <MainHeader />
+  <main class={isWrapped ? 'main wrap' : 'main'}>
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .main { min-height: 60vh; }
+</style>

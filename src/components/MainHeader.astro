@@ -1,0 +1,131 @@
+---
+const navItems = [
+  { label: 'Blog', url: '/blog' },
+  { label: 'Categorías', url: '/blog/categorias' },
+  { label: 'Farmacia', url: 'https://vitau.mx' },
+]
+---
+
+<header class="mainHeader wrap">
+  <a class="mainHeader-logo" href="/blog">
+    <img src="/blog/vitau-logo.svg" alt="Vitau logo" width="117" height="24" />
+  </a>
+
+  <nav class="mainNav" id="mainNav">
+    <div class="mainNav-content">
+      {navItems.map((item) =>
+        item.url.startsWith('http') ? (
+          <a class="mainNav-link" href={item.url} rel="noopener noreferrer">
+            {item.label}
+          </a>
+        ) : (
+          <a class="mainNav-link" href={item.url}>
+            {item.label}
+          </a>
+        )
+      )}
+
+      <button class="toggleMobileNav toggleMobileNav--close" type="button" id="closeNav">
+        <i class="fas fa-times" />
+      </button>
+    </div>
+  </nav>
+
+  <button class="toggleMobileNav" type="button" id="openNav">
+    <i class="fas fa-bars" />
+  </button>
+</header>
+
+<script>
+  const nav = document.getElementById('mainNav')
+  document.getElementById('openNav')?.addEventListener('click', () => nav?.classList.add('isOpen'))
+  document.getElementById('closeNav')?.addEventListener('click', () => nav?.classList.remove('isOpen'))
+</script>
+
+<style>
+  .mainHeader {
+    position: sticky;
+    top: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: var(--shadow);
+    z-index: 1000;
+  }
+  @media (min-width: 500px) {
+    .mainHeader { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+  }
+  @media (min-width: 1440px) {
+    .mainHeader { padding-top: 2rem; padding-bottom: 2rem; }
+  }
+
+  .mainHeader-logo {
+    display: flex;
+    width: 117px;
+  }
+  .mainHeader-logo img { width: 100%; }
+  @media (min-width: 1180px) {
+    .mainHeader-logo { width: 145px; }
+  }
+
+  .mainNav {
+    display: flex;
+  }
+  @media (max-width: 500px) {
+    .mainNav {
+      position: fixed;
+      inset: 0;
+      display: none;
+      visibility: hidden;
+      background-color: rgba(2, 42, 59, 0.5);
+    }
+    .mainNav.isOpen {
+      display: flex;
+      visibility: visible;
+    }
+  }
+
+  .mainNav-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  @media (max-width: 500px) {
+    .mainNav-content {
+      flex-direction: column;
+      background-color: white;
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      left: 1rem;
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      align-items: flex-start;
+    }
+  }
+
+  .mainNav-link {
+    font-size: var(--type-scale-30);
+    color: var(--brand-blue);
+    font-weight: 700;
+    transition: color 200ms ease-in-out;
+    text-decoration: none;
+  }
+  .mainNav-link:hover { color: var(--brand-dark-blue); }
+
+  .toggleMobileNav {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    color: var(--brand-dark-blue);
+  }
+  @media (max-width: 500px) {
+    .toggleMobileNav { display: block; }
+    .toggleMobileNav--close { display: block; align-self: flex-end; }
+  }
+</style>

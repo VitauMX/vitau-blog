@@ -1,0 +1,112 @@
+---
+import AyudaLayout from '../../components/AyudaLayout.astro'
+import { ayudaCategories } from '../../lib/ayuda'
+
+const popularArticles = [
+  { title: '¿Cómo puedo generar un pedido?', slug: 'como-puedo-generar-un-pedido-en-vitau', icon: 'fa-file-alt' },
+  { title: 'Tiempos de entrega y costos', slug: 'tiempos-de-entrega', icon: 'fa-truck' },
+  { title: '¿Cómo facturar mi compra?', slug: 'como-puedo-pedir-la-factura-de-mi-pedido', icon: 'fa-file-invoice' },
+  { title: 'Política de devoluciones', slug: 'se-aceptan-devoluciones', icon: 'fa-undo-alt' },
+]
+---
+
+<AyudaLayout title="Centro de Ayuda | Vitau" description="Encuentra respuestas sobre tus pedidos, envíos y medicamentos.">
+  <div class="ayuda-hero">
+    <div class="ayuda-hero-bg ayuda-hero-bg--tl"></div>
+    <div class="ayuda-hero-bg ayuda-hero-bg--br"></div>
+    <div class="ayuda-hero-content">
+      <h1 class="ayuda-hero-title">Hola, ¿Cómo te podemos ayudar hoy?</h1>
+      <p class="ayuda-hero-subtitle">Encuentra respuestas sobre tus pedidos, envíos y medicamentos.</p>
+      <div class="ayuda-search">
+        <i class="fas fa-search ayuda-search-icon"></i>
+        <input type="text" placeholder="Buscar artículos de ayuda..." class="ayuda-search-input" />
+      </div>
+    </div>
+  </div>
+
+  <main class="ayuda-main">
+    <div class="ayuda-categories">
+      {ayudaCategories.map(cat => (
+        <a href={`/ayuda/${cat.slug}`} class="ayuda-cat-card">
+          <div class="ayuda-cat-icon"><i class={`fas ${cat.icon}`}></i></div>
+          <h2 class="ayuda-cat-title">{cat.name}</h2>
+          <p class="ayuda-cat-desc">{cat.description}</p>
+          <span class="ayuda-cat-link">Ver artículos →</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="ayuda-popular">
+      <h2 class="ayuda-popular-heading">Artículos Populares</h2>
+      <div class="ayuda-popular-grid">
+        {popularArticles.map(article => (
+          <a href={`/ayuda/${article.slug}`} class="ayuda-popular-item">
+            <div class="ayuda-popular-icon"><i class={`fas ${article.icon}`}></i></div>
+            <span>{article.title}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="ayuda-cta">
+      <h2 class="ayuda-cta-title">¿No encuentras lo que buscas?</h2>
+      <p class="ayuda-cta-desc">Nuestro equipo de farmacéuticos y soporte está listo para ayudarte con cualquier duda.</p>
+      <div class="ayuda-cta-actions">
+        <a href="https://wa.me/528148007977?text=Tengo%20una%20duda" class="ayuda-cta-btn ayuda-cta-btn--wa">
+          <i class="fab fa-whatsapp"></i> Chat en WhatsApp
+        </a>
+        <a href="mailto:info@vitau.mx" class="ayuda-cta-btn ayuda-cta-btn--email">Enviar correo</a>
+      </div>
+    </div>
+  </main>
+</AyudaLayout>
+
+<style>
+  .ayuda-hero {
+    background: linear-gradient(to bottom, #022a3b, #003b54);
+    padding: 4rem 2rem 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .ayuda-hero-bg { position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none; }
+  .ayuda-hero-bg--tl { width: 16rem; height: 16rem; background: rgba(255,255,255,0.05); top: -4rem; left: -4rem; }
+  .ayuda-hero-bg--br { width: 24rem; height: 24rem; background: rgba(0,170,255,0.1); bottom: -6rem; right: -6rem; }
+  .ayuda-hero-content { position: relative; z-index: 1; max-width: 48rem; margin: 0 auto; }
+  .ayuda-hero-title { font-size: clamp(1.75rem, 4vw, 3rem); font-weight: 700; color: white; margin: 0 0 1.25rem; line-height: 1.2; }
+  .ayuda-hero-subtitle { font-size: 1.125rem; color: #d1d5db; margin: 0 0 2.5rem; }
+  .ayuda-search { position: relative; max-width: 36rem; margin: 0 auto; }
+  .ayuda-search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #9ca3af; }
+  .ayuda-search-input { width: 100%; padding: 0.875rem 1rem 0.875rem 2.75rem; border-radius: 0.75rem; border: none; font-size: 1rem; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); box-sizing: border-box; font-family: inherit; }
+  .ayuda-search-input:focus { outline: 2px solid #00aaff; }
+
+  .ayuda-main { max-width: 80rem; margin: -3rem auto 0; padding: 0 1.5rem 5rem; position: relative; z-index: 10; flex: 1; }
+
+  .ayuda-categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
+  @media (max-width: 1024px) { .ayuda-categories { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .ayuda-categories { grid-template-columns: 1fr; } }
+  .ayuda-cat-card { background: white; border-radius: 1rem; padding: 1.75rem; text-decoration: none; border: 1px solid #f1f5f9; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: box-shadow 0.2s, transform 0.2s; display: flex; flex-direction: column; gap: 0.75rem; }
+  .ayuda-cat-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .ayuda-cat-icon { width: 3rem; height: 3rem; background: #e0f2fe; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; color: #00aaff; font-size: 1.25rem; }
+  .ayuda-cat-title { font-size: 1rem; font-weight: 700; color: #022a3b; margin: 0; }
+  .ayuda-cat-desc { font-size: 0.875rem; color: #6b7280; margin: 0; line-height: 1.5; flex: 1; }
+  .ayuda-cat-link { font-size: 0.875rem; font-weight: 600; color: #00aaff; margin-top: auto; }
+
+  .ayuda-popular { max-width: 52rem; margin: 0 auto 4rem; }
+  .ayuda-popular-heading { font-size: 1.5rem; font-weight: 700; color: #022a3b; text-align: center; margin: 0 0 2rem; }
+  .ayuda-popular-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+  .ayuda-popular-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: white; border-radius: 0.75rem; border: 1px solid #f1f5f9; box-shadow: 0 1px 2px rgba(0,0,0,0.05); text-decoration: none; color: #374151; font-size: 0.9375rem; font-weight: 500; transition: box-shadow 0.15s, color 0.15s; }
+  .ayuda-popular-item:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); color: #00aaff; }
+  .ayuda-popular-icon { width: 2.25rem; height: 2.25rem; background: #f9fafb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #9ca3af; flex-shrink: 0; transition: background 0.15s, color 0.15s; }
+  .ayuda-popular-item:hover .ayuda-popular-icon { background: #e0f2fe; color: #00aaff; }
+
+  .ayuda-cta { background: white; border-radius: 1.25rem; padding: 3rem 2rem; text-align: center; border: 1px solid #f1f5f9; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .ayuda-cta-title { font-size: 1.5rem; font-weight: 700; color: #022a3b; margin: 0 0 1rem; }
+  .ayuda-cta-desc { color: #6b7280; margin: 0 auto 2rem; max-width: 36rem; line-height: 1.6; }
+  .ayuda-cta-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+  .ayuda-cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-size: 1rem; font-weight: 600; text-decoration: none; transition: background 0.15s; font-family: inherit; }
+  .ayuda-cta-btn--wa { background: #25d366; color: white; }
+  .ayuda-cta-btn--wa:hover { background: #128c7e; }
+  .ayuda-cta-btn--email { background: white; color: #022a3b; border: 1px solid #022a3b; }
+  .ayuda-cta-btn--email:hover { background: #f9fafb; }
+</style>

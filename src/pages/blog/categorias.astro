@@ -1,0 +1,44 @@
+---
+import Layout from '../../components/Layout.astro'
+import CategoryPreview from '../../components/CategoryPreview.astro'
+import { getAllTags } from '../../lib/content'
+
+const tags = await getAllTags()
+---
+
+<Layout
+  title="Categorías | Blog de Vitau"
+  description="Explora todos los temas de salud, nutrición y bienestar en el blog de Vitau."
+  isWrapped={false}
+>
+  <section class="categories wrap">
+    <h1 class="title title--big">Categorías</h1>
+
+    {tags.length === 0 ? (
+      <p class="categories-empty">No hay categorías disponibles todavía.</p>
+    ) : (
+      <div class="categories-content">
+        {tags.map((tag) => (
+          <CategoryPreview tag={tag} />
+        ))}
+      </div>
+    )}
+  </section>
+</Layout>
+
+<style>
+  .categories { padding-top: 4rem; padding-bottom: 3rem; }
+  .categories-empty { color: var(--grey-60); margin-top: 2rem; }
+  .categories-content {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+  @media (min-width: 600px) {
+    .categories-content { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1000px) {
+    .categories-content { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>

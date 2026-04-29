@@ -1,0 +1,138 @@
+---
+import type { GetStaticPaths } from 'astro'
+import Layout from '../../components/Layout.astro'
+import { getAllPosts, formatDate, readingTimeLabel, getPostSlug } from '../../lib/content'
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getAllPosts()
+  return posts.map((post) => ({
+    params: { slug: getPostSlug(post) },
+    props: { post },
+  }))
+}
+
+const { post } = Astro.props
+const { title, featureImage, publishedAt, readingTime, tag, metaTitle, metaDescription, excerpt } =
+  post.data
+
+const canonicalUrl = new URL(`/blog/${getPostSlug(post)}/`, 'https://vitau.mx').href
+const { Content } = await post.render()
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: metaTitle ?? title,
+  description: metaDescription ?? excerpt ?? '',
+  ...(featureImage && { image: featureImage }),
+  datePublished: new Date(publishedAt).toISOString(),
+  publisher: {
+    '@type': 'Organization',
+    name: 'Vitau',
+    url: 'https://vitau.mx',
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+}
+---
+
+<Layout
+  title={metaTitle ?? title}
+  description={metaDescription ?? excerpt}
+  canonicalUrl={canonicalUrl}
+  ogImage={featureImage}
+  publishedAt={publishedAt}
+  isWrapped={false}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
+  <article class="post">
+    {tag && (
+      <a href={`/blog/${tag.slug}`} class="post-category">{tag.name}</a>
+    )}
+
+    <h1 class="title title--displayBig">{title}</h1>
+
+    <p class="post-meta">
+      {formatDate(publishedAt)} | {readingTimeLabel(readingTime)}
+    </p>
+
+    {featureImage && (
+      <figure class="post-featureImage">
+        <img src={featureImage} alt={title} loading="lazy" />
+      </figure>
+    )}
+
+    <section class="post-content">
+      <Content />
+    </section>
+  </article>
+</Layout>
+
+<style>
+  .post {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  .post-category {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--brand-blue);
+    color: white;
+    font-size: var(--type-scale-20);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 100px;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+  .post-category:hover { background-color: var(--brand-blue-shadow); }
+
+  .post .title--displayBig { margin-top: 0.5rem; }
+
+  .post-meta {
+    margin-top: 1rem;
+    color: var(--grey-60);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .post-featureImage {
+    margin-top: 2rem;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+  }
+  .post-featureImage img { width: 100%; height: auto; }
+
+  .post-content {
+    margin-top: 2rem;
+    line-height: 1.7;
+    font-size: var(--type-scale-30);
+    color: var(--grey-90);
+  }
+  .post-content :global(h2),
+  .post-content :global(h3) {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    color: var(--grey-90);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .post-content :global(h2) { font-size: var(--type-scale-50); }
+  .post-content :global(h3) { font-size: var(--type-scale-40); }
+  .post-content :global(p + p) { margin-top: 1.25rem; }
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  .post-content :global(li + li) { margin-top: 0.5rem; }
+  .post-content :global(a) { color: var(--brand-blue); text-decoration: underline; }
+  .post-content :global(img) {
+    max-width: 100%;
+    border-radius: var(--border-radius);
+    margin: 1.5rem 0;
+  }
+  .post-content :global(strong) { font-weight: 700; }
+</style>

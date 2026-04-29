@@ -1,0 +1,66 @@
+---
+---
+
+<section class="hero wrap">
+  <div class="hero-bg">
+    <div class="square square-yellow"></div>
+    <div class="square square-blue"></div>
+  </div>
+
+  <h1 class="title title--display">
+    Tu salud <br /> es nuestra prioridad
+  </h1>
+
+  <p class="subtitle">
+    Salud, nutrición, hábitos, cuidado personal y más maneras de ser la mejor versión de nosotros mismos.
+  </p>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    max-height: 600px;
+    overflow: hidden;
+  }
+  .hero .subtitle { max-width: 610px; }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .square {
+    position: absolute;
+    border-radius: 1rem;
+    transition: 150ms all ease-in-out;
+  }
+  .square-yellow {
+    left: 0;
+    width: 300px;
+    height: 300px;
+    background-color: var(--brand-yellow);
+    transform: translate(-200px, -80px) rotate(23deg);
+  }
+  .square-blue {
+    right: 0;
+    width: 450px;
+    height: 450px;
+    background-color: var(--brand-blue);
+    transform: translate(190px) rotate(150deg);
+  }
+
+  @media (max-width: 900px) {
+    .square-yellow { transform: translate(-250px, 100px) rotate(23deg); }
+    .square-blue { transform: translate(340px, -150px) rotate(150deg); }
+  }
+  @media (min-width: 1800px) {
+    .square-yellow { width: 450px; height: 450px; }
+    .square-blue { width: 550px; height: 550px; }
+  }
+</style>

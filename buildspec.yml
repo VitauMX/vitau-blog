@@ -1,0 +1,41 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - npm install -g pnpm
+      - pnpm install --frozen-lockfile
+
+  build:
+    commands:
+      - pnpm build
+
+  post_build:
+    commands:
+      # HTML — sin cache para que las invalidaciones de CF sean inmediatas
+      - |
+        aws s3 sync dist/ s3://blog-vitau/ \
+          --delete \
+          --exclude "*" \
+          --include "*.html" \
+          --cache-control "public,max-age=0,must-revalidate" \
+          --content-type "text/html; charset=utf-8"
+      # Assets con hash en nombre (blog/_astro/) — cache largo, son inmutables
+      - |
+        aws s3 sync dist/blog/_astro/ s3://blog-vitau/blog/_astro/ \
+          --delete \
+          --cache-control "public,max-age=31536000,immutable"
+      # Resto de assets (fuentes, imágenes, robots.txt, etc.)
+      - |
+        aws s3 sync dist/ s3://blog-vitau/ \
+          --delete \
+          --exclude "*.html" \
+          --exclude "blog/_astro/*" \
+          --cache-control "public,max-age=86400"
+      # Invalidar rutas del blog y ayuda en CF
+      - |
+        aws cloudfront create-invalidation \
+          --distribution-id E2UVOB18PP0Q47 \
+          --paths "/blog/*" "/ayuda/*"

@@ -1,0 +1,47 @@
+---
+import PostPreview from './PostPreview.astro'
+import type { Post } from '../lib/content'
+
+interface Props {
+  posts: Post[]
+}
+
+const { posts } = Astro.props
+---
+
+<section class="postFeed wrap">
+  <h2 class="title title--big">Artículos más recientes</h2>
+
+  {posts.length === 0 ? (
+    <p class="postFeed-empty">No hay artículos publicados todavía.</p>
+  ) : (
+    <div class="postFeed-content">
+      {posts.map((post) => (
+        <PostPreview post={post} />
+      ))}
+    </div>
+  )}
+</section>
+
+<style>
+  .postFeed { padding-top: 3rem; padding-bottom: 3rem; }
+  .postFeed .title { margin-bottom: 2rem; }
+  .postFeed-empty { color: var(--grey-60); margin-top: 2rem; }
+
+  .postFeed-content {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 1000px) {
+    .postFeed-content {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .postFeed-content :global(.postPreview:nth-child(3n+1)),
+    .postFeed-content :global(.postPreview:nth-child(3n-1)) {
+      grid-column-end: span 2;
+    }
+  }
+</style>
