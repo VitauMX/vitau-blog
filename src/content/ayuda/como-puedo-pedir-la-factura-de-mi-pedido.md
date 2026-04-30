@@ -2,6 +2,7 @@
 title: "¿Cómo puedo pedir la factura de mi pedido?"
 category: pagos-y-facturas
 categoryName: Pagos y Facturas
+metaDescription: "Solicita tu factura CFDI 4.0 desde tu cuenta en vitau.mx en pocos pasos. Tienes hasta el último día del mes. Válida para aseguradoras de gastos médicos mayores."
 ---
 
 Para solicitar tu factura, sigue estos pasos desde nuestro portal:

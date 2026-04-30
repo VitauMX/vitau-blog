@@ -13,6 +13,7 @@ const posts = defineCollection({
     tag: z.object({ name: z.string(), slug: z.string() }).optional(),
     metaTitle: z.string().optional(),
     metaDescription: z.string().optional(),
+    author: z.string().optional(),
     featured: z.boolean().default(false),
     html: z.string(),
   }),
@@ -25,6 +26,7 @@ const ayuda = defineCollection({
     title: z.string(),
     category: z.string(),
     categoryName: z.string(),
+    metaDescription: z.string().optional(),
     html: z.string(),
   }),
 })

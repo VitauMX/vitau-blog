@@ -2,6 +2,7 @@
 title: "Términos y condiciones generales de promociones Vitau"
 category: promociones-y-descuentos
 categoryName: Promociones y Descuentos
+metaDescription: "Conoce los términos y condiciones de las promociones y cupones de Vitau: vigencias, restricciones de uso, acumulación y políticas de modificación."
 ---
 
 A menos que se especifique lo contrario, aplican los siguientes términos generales:

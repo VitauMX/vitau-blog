@@ -33,13 +33,70 @@ type Props =
 
 const props = Astro.props
 const activeCategory = props.type === 'category' ? props.category.slug : props.article.data.category
+
 const pageTitle = props.type === 'category'
   ? `${props.category.name} | Centro de Ayuda Vitau`
   : `${props.article.data.title} | Centro de Ayuda Vitau`
 
+const pageDescription = props.type === 'category'
+  ? `${props.category.description} Vitau — Farmacia en línea en México.`
+  : (props.article.data.metaDescription ?? `${props.article.data.title} — Vitau Centro de Ayuda`)
+
+const canonicalUrl = props.type === 'category'
+  ? new URL(`/ayuda/${props.category.slug}/`, 'https://vitau.mx').href
+  : new URL(`/ayuda/${props.article.data.slug}/`, 'https://vitau.mx').href
+
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
+// BreadcrumbList schema (all pages)
+const breadcrumbSchema = props.type === 'article' ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://vitau.mx' },
+    { '@type': 'ListItem', position: 2, name: 'Centro de Ayuda', item: 'https://vitau.mx/ayuda' },
+    { '@type': 'ListItem', position: 3, name: props.article.data.categoryName, item: `https://vitau.mx/ayuda/${props.article.data.category}` },
+    { '@type': 'ListItem', position: 4, name: props.article.data.title, item: canonicalUrl },
+  ],
+} : {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://vitau.mx' },
+    { '@type': 'ListItem', position: 2, name: 'Centro de Ayuda', item: 'https://vitau.mx/ayuda' },
+    { '@type': 'ListItem', position: 3, name: props.category.name, item: canonicalUrl },
+  ],
+}
+
+// FAQPage schema for question-titled articles
+const isQuestion = props.type === 'article' && props.article.data.title.startsWith('¿')
+const faqSchema = (props.type === 'article' && isQuestion) ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [{
+    '@type': 'Question',
+    name: props.article.data.title,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: stripHtml(props.article.data.html),
+    },
+  }],
+} : null
+
+// HowTo schema for step-by-step guides (numbered lists)
+const isGuide = props.type === 'article' && !isQuestion
+const howToSchema = null // generated per-article in Notion; leave for future
+
+// Health disclaimer: compras-recurrentes touches medication adherence
+const showHealthDisclaimer = props.type === 'article' && props.article.data.category === 'compras-recurrentes'
 ---
 
-<AyudaLayout title={pageTitle}>
+<AyudaLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl}>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
+  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />}
+
   <div class="ayuda-inner-hero">
     <div class="ayuda-search-wrap">
       <i class="fas fa-search ayuda-search-icon"></i>
@@ -105,6 +162,11 @@ const pageTitle = props.type === 'category'
             </nav>
             <h1 class="ayuda-article-title">{props.article.data.title}</h1>
             <div class="ayuda-article-body"><Fragment set:html={props.article.data.html} /></div>
+            {showHealthDisclaimer && (
+              <div class="ayuda-cofepris-notice" role="note" aria-label="Aviso de salud">
+                <strong>Aviso de salud:</strong> La información de este artículo es de carácter informativo y no sustituye la consulta médica profesional. Consulta a tu médico o farmacéutico antes de modificar tu tratamiento. Responsable Sanitario: Jommors Olvera Muñoz (Ced. Prof. 6407754).
+              </div>
+            )}
             <div class="ayuda-feedback">
               <p>¿Te resultó útil este artículo?</p>
               <div class="ayuda-feedback-actions">
@@ -168,6 +230,8 @@ const pageTitle = props.type === 'category'
   .ayuda-article-body :global(li) { margin-bottom: 0.5rem; }
   .ayuda-article-body :global(strong) { font-weight: 700; color: #022a3b; }
   .ayuda-article-body :global(a) { color: #00aaff; text-decoration: underline; }
+
+  .ayuda-cofepris-notice { margin-top: 2rem; padding: 1rem 1.25rem; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 0.5rem; font-size: 0.875rem; color: #0c4a6e; line-height: 1.6; }
 
   .ayuda-feedback { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #f1f5f9; text-align: center; }
   .ayuda-feedback p { color: #6b7280; font-weight: 500; margin: 0 0 1rem; }

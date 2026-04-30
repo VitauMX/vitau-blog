@@ -2,6 +2,7 @@
 title: "¿Cómo puedo generar un pedido en Vitau?"
 category: preguntas-frecuentes
 categoryName: Preguntas Frecuentes
+metaDescription: "Genera tu pedido en Vitau fácilmente desde nuestra app, por WhatsApp o en vitau.mx. Descubre las 3 formas de hacer tu compra de medicamentos en línea."
 ---
 
 ¡Puedes generar un pedido desde nuestra tienda en línea con tan solo un par de clicks!

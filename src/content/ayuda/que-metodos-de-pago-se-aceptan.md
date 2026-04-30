@@ -2,6 +2,7 @@
 title: "¿Qué métodos de pago se aceptan?"
 category: pagos-y-facturas
 categoryName: Pagos y Facturas
+metaDescription: "Vitau acepta tarjetas Visa, Mastercard y Amex, PayPal, transferencia SPEI y pago en efectivo en OXXO y 7-Eleven. Transacciones seguras con estándar PCI DSS."
 ---
 
 En Vitau ofrecemos múltiples opciones de pago:

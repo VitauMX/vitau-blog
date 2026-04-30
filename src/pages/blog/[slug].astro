@@ -13,7 +13,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 interface Props { post: Post }
 const { post } = Astro.props
-const { title, featureImage, publishedAt, readingTime, tag, metaTitle, metaDescription, excerpt, html } =
+const { title, featureImage, publishedAt, readingTime, tag, metaTitle, metaDescription, excerpt, html, author } =
   post.data
 
 const canonicalUrl = new URL(`/blog/${getPostSlug(post)}/`, 'https://vitau.mx').href
@@ -25,12 +25,36 @@ const schema = {
   description: metaDescription ?? excerpt ?? '',
   ...(featureImage && { image: featureImage }),
   datePublished: new Date(publishedAt).toISOString(),
+  author: author
+    ? { '@type': 'Person', name: author }
+    : { '@type': 'Organization', name: 'Vitau', url: 'https://vitau.mx' },
+  contributor: {
+    '@type': 'Person',
+    name: 'Jommors Olvera Muñoz',
+    jobTitle: 'QFB — Responsable Sanitario',
+  },
   publisher: {
     '@type': 'Organization',
     name: 'Vitau',
     url: 'https://vitau.mx',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://vitau.mx/blog/vitau-logo.svg',
+    },
   },
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://vitau.mx' },
+    { '@type': 'ListItem', position: 2, name: 'Blog de Salud y Bienestar', item: 'https://vitau.mx/blog' },
+    ...(tag ? [{ '@type': 'ListItem', position: 3, name: tag.name, item: `https://vitau.mx/blog/${tag.slug}` },
+                { '@type': 'ListItem', position: 4, name: title, item: canonicalUrl }]
+             : [{ '@type': 'ListItem', position: 3, name: title, item: canonicalUrl }]),
+  ],
 }
 ---
 
@@ -43,6 +67,7 @@ const schema = {
   isWrapped={false}
 >
   <script type="application/ld+json" set:html={JSON.stringify(schema)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
   <article class="post">
     {tag && (
       <a href={`/blog/${tag.slug}`} class="post-category">{tag.name}</a>
@@ -63,6 +88,15 @@ const schema = {
     <section class="post-content">
       <Fragment set:html={html} />
     </section>
+
+    <aside class="post-cofepris" role="note" aria-label="Aviso de salud COFEPRIS">
+      <p>
+        <strong>Consulte a su médico.</strong> El contenido de este artículo es informativo y educativo; no constituye consejo médico, diagnóstico ni tratamiento. Toda decisión sobre su salud o medicamentos debe ser tomada con un profesional de la salud.
+      </p>
+      <p class="post-cofepris-credit">
+        Revisado por <strong>Jommors Olvera Muñoz</strong>, Químico Farmacobiólogo · Ced. Prof. 6407754 · Responsable Sanitario Vitau · Lic. Sanitaria 19039090963.
+      </p>
+    </aside>
   </article>
 </Layout>
 
@@ -149,6 +183,21 @@ const schema = {
     border-radius: var(--border-radius);
     overflow: hidden;
   }
+  .post-cofepris {
+    margin-top: 3rem;
+    padding: 1.25rem 1.5rem;
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-left: 4px solid #0ea5e9;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: #0c4a6e;
+    line-height: 1.6;
+  }
+  .post-cofepris p { margin: 0; }
+  .post-cofepris p + p { margin-top: 0.5rem; }
+  .post-cofepris-credit { opacity: 0.8; }
+
   .post-content :global(.video-embed iframe) {
     position: absolute;
     inset: 0;

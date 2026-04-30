@@ -6,8 +6,9 @@ readingTime: 2
 tag:
   name: Salud
   slug: salud
-metaTitle: Bienvenidos al Blog de Vitau
-metaDescription: Tu salud es nuestra prioridad. Descubre artículos sobre salud, nutrición y bienestar.
+metaTitle: Blog de Salud y Bienestar | Vitau
+metaDescription: "En Vitau encontrarás artículos sobre salud, nutrición y hábitos saludables, revisados por nuestro equipo de farmacéuticos. Información confiable para cuidar tu salud."
+author: Vitau
 ---
 
 En Vitau creemos que la información es el primer paso hacia una vida más saludable.

@@ -2,6 +2,7 @@
 title: "¿Se aceptan devoluciones?"
 category: preguntas-frecuentes
 categoryName: Preguntas Frecuentes
+metaDescription: "Por regulación sanitaria, Vitau no acepta devoluciones de medicamentos entregados, salvo errores en el surtido o defectos de fábrica evidentes."
 ---
 
 Por regulación sanitaria y para garantizar la seguridad de todos nuestros pacientes, **no podemos aceptar devoluciones de medicamentos** una vez que han sido entregados.

@@ -2,6 +2,7 @@
 title: "Recordatorios en nuestra App: Una nueva herramienta para cuidar de tu salud"
 category: compras-recurrentes
 categoryName: Compras Recurrentes
+metaDescription: "Configura recordatorios para tus medicamentos en la app de Vitau. Recibe alertas de toma y de recompra para mejorar la adherencia a tu tratamiento. Disponible en iOS y Android."
 ---
 
 Te invitamos a conocer esta herramienta en nuestra App que te permitirá programar recordatorios para llevar un mejor control de tu tratamiento.

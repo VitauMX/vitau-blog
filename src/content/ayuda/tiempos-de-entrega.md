@@ -2,6 +2,7 @@
 title: "Tiempos de Entrega"
 category: preguntas-frecuentes
 categoryName: Preguntas Frecuentes
+metaDescription: "Vitau entrega medicamentos en 1 a 2 días hábiles en Monterrey y área metropolitana, y en 24 a 48 horas para envíos nacionales a todo México."
 ---
 
 En Vitau nos preocupamos por la salud de nuestros pacientes, por lo que ofrecemos entregas locales y nacionales hasta la puerta de tu casa.

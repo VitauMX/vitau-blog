@@ -2,6 +2,7 @@
 title: "Mi intento de pago fue rechazado ¿Qué puedo hacer?"
 category: pagos-y-facturas
 categoryName: Pagos y Facturas
+metaDescription: "Si tu pago fue rechazado en Vitau, verifica los datos de tu tarjeta, confirma saldo disponible o prueba otro método de pago. Te ayudamos a completar tu compra."
 ---
 
 Si tu pago con tarjeta fue rechazado, te recomendamos:
