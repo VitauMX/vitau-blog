@@ -15,9 +15,19 @@ function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 }
 
+function decodeHtmlEntities(s: string): string {
+  return s
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+}
+
 function rtToHtml(rt: unknown[]): string {
   return rt.map((item: any) => {
-    let t = esc(item.plain_text ?? '')
+    let t = esc(decodeHtmlEntities(item.plain_text ?? ''))
     const a = item.annotations ?? {}
     if (a.code) t = `<code>${t}</code>`
     if (a.bold) t = `<strong>${t}</strong>`
