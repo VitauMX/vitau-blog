@@ -85,9 +85,21 @@ const faqSchema = (props.type === 'article' && isQuestion) ? {
   }],
 } : null
 
-// HowTo schema for step-by-step guides (numbered lists)
-const isGuide = props.type === 'article' && !isQuestion
-const howToSchema = null // generated per-article in Notion; leave for future
+// Article schema for all ayuda articles
+const articleSchema = props.type === 'article' ? {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: props.article.data.title,
+  description: props.article.data.metaDescription ?? `${props.article.data.title} — Vitau Centro de Ayuda`,
+  author: { '@type': 'Organization', name: 'Vitau', url: 'https://vitau.mx' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Vitau',
+    url: 'https://vitau.mx',
+    logo: { '@type': 'ImageObject', url: 'https://vitau.mx/blog/vitau-logo.svg' },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+} : null
 
 // Health disclaimer: compras-recurrentes touches medication adherence
 const showHealthDisclaimer = props.type === 'article' && props.article.data.category === 'compras-recurrentes'
@@ -95,6 +107,7 @@ const showHealthDisclaimer = props.type === 'article' && props.article.data.cate
 
 <AyudaLayout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl}>
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
+  {articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} slot="head" />}
   {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />}
 
   <div class="ayuda-inner-hero">
