@@ -366,8 +366,9 @@ async function createPost(post: GhostPost, tags: string[]): Promise<void> {
   }
 
   if (post.feature_image) {
+    const featureImageUrl = post.feature_image.replace(/__GHOST_URL__/g, 'https://blog-admin.vitau.mx')
     properties['FeaturedImage'] = {
-      files: [{ type: 'external', name: 'cover', external: { url: post.feature_image } }],
+      files: [{ type: 'external', name: 'cover', external: { url: featureImageUrl } }],
     }
   }
 
