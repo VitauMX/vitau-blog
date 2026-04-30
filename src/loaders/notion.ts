@@ -133,6 +133,18 @@ async function blocksToHtml(blocks: AnyBlock[], imgDir: string): Promise<string>
         parts.push(`<figure><img src="${esc(src)}" loading="lazy">${caption}</figure>`)
         break
       }
+      case 'video': {
+        const vid = (b as any).video
+        const url: string = vid?.type === 'external' ? vid.external?.url : vid?.file?.url
+        if (!url) break
+        const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/)
+        if (ytMatch) {
+          parts.push(`<figure class="video-embed"><iframe src="https://www.youtube.com/embed/${ytMatch[1]}" frameborder="0" allowfullscreen loading="lazy"></iframe></figure>`)
+        } else {
+          parts.push(`<p><a href="${esc(url)}">${esc(url)}</a></p>`)
+        }
+        break
+      }
       case 'bookmark': {
         const url = (b as any).bookmark?.url as string | undefined
         if (url) parts.push(`<p><a href="${esc(url)}">${esc(url)}</a></p>`)
