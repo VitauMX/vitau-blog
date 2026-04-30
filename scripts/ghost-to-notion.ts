@@ -281,16 +281,19 @@ function htmlToBlocks(html: string): NotionBlock[] {
         break
       }
       case 'figure': {
+        const iframe = node.querySelector('iframe')
+        if (iframe) {
+          const src = iframe.getAttribute('src') ?? ''
+          const videoUrl = src
+            .replace('youtube.com/embed/', 'youtube.com/watch?v=')
+            .replace('?feature=oembed', '')
+          if (videoUrl) blocks.push({ object: 'block', type: 'video', video: { type: 'external', external: { url: videoUrl } } })
+          break
+        }
         const img = node.querySelector('img')
         if (img) {
           const src = img.getAttribute('src') ?? img.getAttribute('data-src') ?? ''
-          if (src) {
-            blocks.push({
-              object: 'block',
-              type: 'image',
-              image: { type: 'external', external: { url: src } },
-            })
-          }
+          if (src) blocks.push({ object: 'block', type: 'image', image: { type: 'external', external: { url: src } } })
         }
         break
       }
