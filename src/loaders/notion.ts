@@ -80,12 +80,14 @@ async function blocksToHtml(blocks: AnyBlock[], imgDir: string): Promise<string>
     const b = blocks[i]
 
     if (b.type === 'bulleted_list_item' || b.type === 'numbered_list_item') {
-      const listType = b.type
-      const tag = listType === 'bulleted_list_item' ? 'ul' : 'ol'
+      const tag = b.type === 'bulleted_list_item' ? 'ul' : 'ol'
       const items: string[] = []
-      while (i < blocks.length && blocks[i].type === listType) {
+      while (i < blocks.length && blocks[i].type === b.type) {
         const bi = blocks[i] as any
-        items.push(`<li>${rtToHtml(bi[listType].rich_text ?? [])}</li>`)
+        const richText = bi.type === 'bulleted_list_item'
+          ? bi.bulleted_list_item?.rich_text ?? []
+          : bi.numbered_list_item?.rich_text ?? []
+        items.push(`<li>${rtToHtml(richText)}</li>`)
         i++
       }
       parts.push(`<${tag}>${items.join('')}</${tag}>`)
