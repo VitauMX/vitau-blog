@@ -1,29 +1,79 @@
 ---
 import Layout from '../components/Layout.astro'
+
+const fromBlog = Astro.url.pathname.startsWith('/blog')
+const fromAyuda = Astro.url.pathname.startsWith('/ayuda')
+
+const backHref = fromAyuda ? '/ayuda' : '/blog'
+const backLabel = fromAyuda ? 'Centro de Ayuda' : 'Blog de Vitau'
+const contextMsg = fromAyuda
+  ? 'El artículo que buscas no está disponible o fue movido.'
+  : 'El artículo que buscas no está disponible o fue retirado.'
 ---
 
-<Layout title="Página no encontrada | Vitau Blog">
-  <section class="notFound">
-    <h1 class="title title--display">404</h1>
-    <p class="subtitle">Esta página no existe.</p>
-    <a href="/blog" class="notFound-link">← Volver al blog</a>
+<Layout title="Página no encontrada | Vitau">
+  <section class="not-found">
+    <div class="not-found-icon">📄</div>
+    <h1 class="not-found-title">Artículo no disponible</h1>
+    <p class="not-found-msg">{contextMsg}</p>
+    <a href={backHref} class="not-found-btn">Ver todos los artículos</a>
+    <a href="https://vitau.mx" class="not-found-home">Ir a vitau.mx →</a>
   </section>
 </Layout>
 
 <style>
-  .notFound {
+  .not-found {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 6rem 2rem;
-    gap: 1.5rem;
+    gap: 1.25rem;
+    min-height: 60vh;
   }
-  .notFound-link {
-    color: var(--brand-blue);
+
+  .not-found-icon {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .not-found-title {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
     font-weight: 700;
-    text-decoration: none;
+    color: #022a3b;
+    margin: 0;
   }
-  .notFound-link:hover { color: var(--brand-blue-shadow); }
+
+  .not-found-msg {
+    color: #6b7280;
+    font-size: 1.0625rem;
+    margin: 0;
+    max-width: 36rem;
+    line-height: 1.6;
+  }
+
+  .not-found-btn {
+    margin-top: 0.5rem;
+    display: inline-block;
+    background: #00aaff;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    padding: 0.625rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .not-found-btn:hover { background: #0099e6; }
+
+  .not-found-home {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .not-found-home:hover { color: #022a3b; }
 </style>
