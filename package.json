@@ -10,6 +10,7 @@
     "check": "astro check"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@notionhq/client": "^5.20.0",
     "astro": "^5.0.0"
   },
