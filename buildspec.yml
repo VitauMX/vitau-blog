@@ -41,6 +41,11 @@ phases:
           --exclude "blog/_astro/*" \
           --exclude "blog/images/*" \
           --cache-control "public,max-age=86400"
+      # Copiar 404.html al path de blog para el custom error response de CF
+      - |
+        aws s3 cp s3://blog-vitau/404.html s3://blog-vitau/blog/404.html \
+          --cache-control "public,max-age=0,must-revalidate" \
+          --content-type "text/html; charset=utf-8"
       # Invalidar rutas del blog y ayuda en CF
       - |
         aws cloudfront create-invalidation \
