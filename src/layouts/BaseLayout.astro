@@ -17,7 +17,9 @@ const {
   publishedAt,
 } = Astro.props
 
-const rawPath = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : Astro.url.pathname + '/'
+const rawPath = Astro.url.pathname.endsWith('/') && Astro.url.pathname !== '/'
+  ? Astro.url.pathname.slice(0, -1)
+  : Astro.url.pathname
 const canonical = canonicalUrl ?? new URL(rawPath, 'https://vitau.mx').href
 const isArticle = !!publishedAt
 const publishedIso = publishedAt ? new Date(publishedAt).toISOString() : undefined

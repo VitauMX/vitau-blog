@@ -6,7 +6,7 @@ export const GET: APIRoute = async () => {
 
   const categoryUrls = ayudaCategories.map(
     (cat) => `  <url>
-    <loc>https://vitau.mx/ayuda/${cat.slug}/</loc>
+    <loc>https://vitau.mx/ayuda/${cat.slug}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>`,
@@ -14,7 +14,7 @@ export const GET: APIRoute = async () => {
 
   const articleUrls = articles.map(
     (article) => `  <url>
-    <loc>https://vitau.mx/ayuda/${getAyudaSlug(article)}/</loc>
+    <loc>https://vitau.mx/ayuda/${getAyudaSlug(article)}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>`,
@@ -23,7 +23,7 @@ export const GET: APIRoute = async () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://vitau.mx/ayuda/</loc>
+    <loc>https://vitau.mx/ayuda</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
