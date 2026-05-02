@@ -16,7 +16,7 @@ const { post } = Astro.props
 const { title, featureImage, publishedAt, readingTime, tag, metaTitle, metaDescription, excerpt, html, author } =
   post.data
 
-const canonicalUrl = new URL(`/blog/${getPostSlug(post)}/`, 'https://vitau.mx').href
+const canonicalUrl = new URL(`/blog/${getPostSlug(post)}`, 'https://vitau.mx').href
 
 const schema = {
   '@context': 'https://schema.org',

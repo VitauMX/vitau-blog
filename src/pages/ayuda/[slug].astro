@@ -43,8 +43,8 @@ const pageDescription = props.type === 'category'
   : (props.article.data.metaDescription ?? `${props.article.data.title} — Vitau Centro de Ayuda`)
 
 const canonicalUrl = props.type === 'category'
-  ? new URL(`/ayuda/${props.category.slug}/`, 'https://vitau.mx').href
-  : new URL(`/ayuda/${props.article.data.slug}/`, 'https://vitau.mx').href
+  ? new URL(`/ayuda/${props.category.slug}`, 'https://vitau.mx').href
+  : new URL(`/ayuda/${props.article.data.slug}`, 'https://vitau.mx').href
 
 function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
