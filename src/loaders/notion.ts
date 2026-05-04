@@ -33,7 +33,11 @@ function rtToHtml(rt: unknown[]): string {
     if (a.bold) t = `<strong>${t}</strong>`
     if (a.italic) t = `<em>${t}</em>`
     if (a.strikethrough) t = `<s>${t}</s>`
-    if (item.href) t = `<a href="${esc(item.href)}">${t}</a>`
+    if (item.href) {
+      const isExternal = /^https?:\/\//.test(item.href) && !item.href.includes('vitau.mx')
+      const rel = isExternal ? ' rel="nofollow noopener noreferrer" target="_blank"' : ''
+      t = `<a href="${esc(item.href)}"${rel}>${t}</a>`
+    }
     return t
   }).join('')
 }
