@@ -14,9 +14,6 @@
     "@notionhq/client": "^5.20.0",
     "astro": "^5.0.0"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
-  },
   "devDependencies": {
     "@astrojs/check": "latest",
     "@tailwindcss/vite": "^4.0.0",
